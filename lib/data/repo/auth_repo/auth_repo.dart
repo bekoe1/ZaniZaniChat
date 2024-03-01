@@ -9,7 +9,13 @@ class AuthRepository {
       requestHeader: true,
       requestBody: true,
     ));
-
+  static Future<void> LogOut() async{
+    final logoutUrl = "http://147.45.74.185:8000/logout";
+    Map<String, dynamic> data = {
+      "session" : 3
+    };
+    dio.post(logoutUrl, data: data);
+  }
   static Future<void> ConnectToWebSocket() async {
     final wsUrl = Uri.parse(
         'ws://147.45.74.185:8000/websocket/messages?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6Ik9wZXIiLCJleHAiOjE3MDkwNTg2NDF9.r_pWEY33C15GEXuo2oIbcYYKTfTDMRG0D-5ra4iH7Fg');
