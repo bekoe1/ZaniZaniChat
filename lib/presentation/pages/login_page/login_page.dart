@@ -1,4 +1,5 @@
 import 'package:bloc_test_app/bloc/log_in/log_in_bloc.dart';
+import 'package:bloc_test_app/presentation/pages/dialogs_page/dialogs.page.dart';
 import 'package:bloc_test_app/utils/network/form_submission_status.dart';
 import 'package:bloc_test_app/utils/network/test_network.dart';
 import 'package:bloc_test_app/utils/snack_bar.dart';
@@ -128,6 +129,7 @@ class _AuthWidgetState extends State<AuthWidget> {
                     fontSize: 20,
                     func: () async{
                         context.read<LogInBloc>().add(LoginDone());
+
                     },
                     bckgroundColor: Colors.red,
                     textColor: Colors.white,

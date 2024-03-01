@@ -1,8 +1,12 @@
+
+import 'dart:io';
+
 import 'package:dio/dio.dart';
+import 'package:flutter/services.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 import 'package:web_socket_channel/web_socket_channel.dart';
 import 'package:web_socket_channel/status.dart' as status;
-
+import 'package:shared_preferences/shared_preferences.dart';
 class AuthRepository {
   static final Dio dio = Dio()
     ..interceptors.add(PrettyDioLogger(
@@ -11,10 +15,13 @@ class AuthRepository {
     ));
   static Future<void> LogOut() async{
     final logoutUrl = "http://147.45.74.185:8000/logout";
+    SharedPreferences prefs = await SharedPreferences.getInstance();
     Map<String, dynamic> data = {
-      "session" : 3
+      "session" : prefs.getString("Session")
     };
     dio.post(logoutUrl, data: data);
+    prefs.remove("Session");
+    exit(0);
   }
   static Future<void> ConnectToWebSocket() async {
     final wsUrl = Uri.parse(
