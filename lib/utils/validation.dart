@@ -19,7 +19,7 @@ abstract class Validation{
       return "Введитее данные";
     }
 
-    String pattern = r'^[a-zA-Z]{4,}$';
+    String pattern = r'^[a-zA-Z]{4,}\d*$';
     RegExp regEx = RegExp(pattern);
     if(!regEx.hasMatch(username)){
       return "Некорректное имя пользователя";

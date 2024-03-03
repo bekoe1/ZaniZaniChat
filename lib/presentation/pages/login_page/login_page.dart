@@ -1,6 +1,6 @@
-import 'package:bloc_test_app/bloc/log_in/log_in_bloc.dart';
+import 'package:bloc_test_app/presentation/pages/login_page/bloc/log_in_bloc.dart';
 import 'package:bloc_test_app/presentation/pages/dialogs_page/dialogs.page.dart';
-import 'package:bloc_test_app/utils/network/form_submission_status.dart';
+import 'package:bloc_test_app/utils/form_submission_status.dart';
 import 'package:bloc_test_app/utils/network/test_network.dart';
 import 'package:bloc_test_app/utils/snack_bar.dart';
 import 'package:flutter/material.dart';
@@ -11,18 +11,18 @@ import '../../../utils/textfields.dart';
 import '../../../utils/validation.dart';
 import '../sign_in_page/sign_in_page.dart';
 
-class AuthWidget extends StatefulWidget {
-  const AuthWidget({super.key});
+class LogInPage extends StatefulWidget {
+  const LogInPage({super.key});
 
   @override
-  State<AuthWidget> createState() => _AuthWidgetState();
+  State<LogInPage> createState() => _LogInPageState();
 }
 
-class _AuthWidgetState extends State<AuthWidget> {
+class _LogInPageState extends State<LogInPage> {
   final usernameController = TextEditingController.fromValue(
       const TextEditingValue(text: "sdjdjd@gm.cc"));
   final passwordController =
-  TextEditingController.fromValue(const TextEditingValue(text: "sdjdjd!Q"));
+      TextEditingController.fromValue(const TextEditingValue(text: "sdjdjd!Q"));
   bool obscuringPassword = true;
   IconData obscuringIcon = Icons.visibility_off;
   final formKey = GlobalKey<FormState>();
@@ -30,6 +30,7 @@ class _AuthWidgetState extends State<AuthWidget> {
     backgroundColor: Colors.white54,
     content: Text("Введите корректные данные!"),
   );
+
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
@@ -67,12 +68,16 @@ class _AuthWidgetState extends State<AuthWidget> {
                     BlocBuilder<LogInBloc, LogInState>(
                       builder: (context, state) {
                         return CustomTextFormField(
-                          onChanged: (name){BlocProvider.of<LogInBloc>(context).add(LoginUsernameChanged(username: usernameController.text));},
+                          onChanged: (name) {
+                            context.read<LogInBloc>().add(LoginUsernameChanged(
+                                username: usernameController.text));
+                          },
                           width: 350,
                           validationFunc: (value) {
                             if (Validation.ValidateUsername(value!) != null) {
                               return Validation.ValidateUsername(value);
                             }
+                            return null;
                           },
                           labelText: "Введите имя пользователя",
                           controller: usernameController,
@@ -98,8 +103,8 @@ class _AuthWidgetState extends State<AuthWidget> {
                             icon: Icons.https,
                             obscuringPass: obscuringPassword,
                             suffixIcon: obscuringIcon,
-                            onChanged: (name){
-                              BlocProvider.of<LogInBloc>(context).add(
+                            onChanged: (name) {
+                              context.read<LogInBloc>().add(
                                   LoginPasswordChanged(
                                       password: passwordController.text));
                             },
@@ -121,19 +126,20 @@ class _AuthWidgetState extends State<AuthWidget> {
               ),
               BlocBuilder<LogInBloc, LogInState>(
                 builder: (context, state) {
-                   return state.status is FormSubmitting
+                  return state.status is FormSubmitting
                       ? const CircularProgressIndicator(
-                    color: Colors.white, backgroundColor: Colors.red,) :
-                  CustomElevatedButton(
-                    text: "Войти",
-                    fontSize: 20,
-                    func: () async{
-                        context.read<LogInBloc>().add(LoginDone());
-
-                    },
-                    bckgroundColor: Colors.red,
-                    textColor: Colors.white,
-                  );
+                          color: Colors.white,
+                          backgroundColor: Colors.red,
+                        )
+                      : CustomElevatedButton(
+                          text: "Войти",
+                          fontSize: 20,
+                          func: () async {
+                            context.read<LogInBloc>().add(LoginDone());
+                          },
+                          bckgroundColor: Colors.red,
+                          textColor: Colors.white,
+                        );
                 },
               ),
               const SizedBox(
@@ -181,12 +187,7 @@ class _AuthWidgetState extends State<AuthWidget> {
                   ),
                   TextButton(
                     onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => const SignInPage(),
-                        ),
-                      );
+                      Navigator.pushNamed(context, '/sign_in');
                     },
                     child: const Text(
                       "Зарегестрируйтесь",

@@ -2,10 +2,11 @@ import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 import 'package:bloc_test_app/data/repo/auth_repo/auth_repo.dart';
+import 'package:bloc_test_app/utils/internal_storage_helper.dart';
 import 'package:meta/meta.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import '../../utils/network/form_submission_status.dart';
+import '../../../../utils/form_submission_status.dart';
 
 part 'log_in_event.dart';
 
@@ -34,9 +35,8 @@ class LogInBloc extends Bloc<LogInEvent, LogInState> {
       try {
         response =
             await AuthRepository.LogInData(state.username, state.password);
-        final SharedPreferences prefs = await SharedPreferences.getInstance();
         if (response != null) {
-          prefs.setString("Session", response.toString());
+          SharedPrefsHelper.SetSessionToken(response.toString());
         } else {
           throw "Сервер не вернул токен";
         }

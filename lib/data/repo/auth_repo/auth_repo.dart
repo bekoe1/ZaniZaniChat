@@ -1,6 +1,7 @@
 
 import 'dart:io';
-
+import 'dart:developer';
+import 'package:bloc_test_app/utils/internal_storage_helper.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/services.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
@@ -15,13 +16,12 @@ class AuthRepository {
     ));
   static Future<void> LogOut() async{
     final logoutUrl = "http://147.45.74.185:8000/logout";
-    SharedPreferences prefs = await SharedPreferences.getInstance();
     Map<String, dynamic> data = {
-      "session" : prefs.getString("Session")
+      "session" : SharedPrefsHelper.sessionName
     };
     dio.post(logoutUrl, data: data);
-    prefs.remove("Session");
-    exit(0);
+    SharedPrefsHelper.DeleteSession();
+    // exit(0);
   }
   static Future<void> ConnectToWebSocket() async {
     final wsUrl = Uri.parse(
@@ -50,14 +50,13 @@ class AuthRepository {
           await dio.post('http://147.45.74.185:8000/new_session', data: data);
 
       if (response.statusCode == 200) {
-        print(response.data.toString());
         return response.data.toString();
       }
 
     } catch (e) {
-      print('Error: $e');
       return null;
     }
+    return null;
   }
 
   static Future<bool> SignInData(String name, String email, String pass) async {
@@ -73,11 +72,11 @@ class AuthRepository {
       if (response.statusCode == 200) {
         return true;
       } else {
-        print('Failed: ${response.statusCode}');
+        log('Failed: ${response.statusCode}');
         return false;
       }
     } catch (e) {
-      print('Error: $e');
+      log('Error: $e');
       return false;
     }
   }

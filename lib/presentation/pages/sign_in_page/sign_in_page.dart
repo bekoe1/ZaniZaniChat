@@ -1,6 +1,6 @@
 import 'package:bloc_test_app/data/repo/auth_repo/auth_repo.dart';
 import 'package:bloc_test_app/presentation/pages/login_page/login_page.dart';
-import 'package:bloc_test_app/utils/network/test_network.dart';
+import 'package:bloc_test_app/utils/snack_bar.dart';
 import 'package:flutter/material.dart';
 
 import '../../../utils/buttons.dart';
@@ -21,6 +21,10 @@ class _SignInPageState extends State<SignInPage> {
   final passwordController = TextEditingController();
   bool obscuringPassword = true;
   IconData obscuringIcon = Icons.visibility_off;
+  final snackBar = const CustomSnackBar(
+      text: "Возникла ошибка",
+      backgroundColor: Colors.grey,
+      mainColor: Colors.white);
 
   @override
   Widget build(BuildContext context) {
@@ -78,6 +82,7 @@ class _SignInPageState extends State<SignInPage> {
                       if (Validation.ValidatePass(value!) != null) {
                         return Validation.ValidatePass(value);
                       }
+                      return null;
                     },
                     labelText: "Введите пароль",
                     controller: passwordController,
@@ -101,8 +106,9 @@ class _SignInPageState extends State<SignInPage> {
                   CustomTextFormField(
                     validationFunc: (value) {
                       if (Validation.ValidateEmail(value!) != null) {
-                        return Validation.ValidateEmail(value!);
+                        return Validation.ValidateEmail(value);
                       }
+                      return null;
                     },
                     width: 350,
                     labelText: "Введите email",
@@ -117,18 +123,36 @@ class _SignInPageState extends State<SignInPage> {
             CustomElevatedButton(
                 fontSize: 20,
                 text: "Зарегистрироваться",
-                func: () async{
+                func: () async {
                   if (formKey.currentState!.validate()) {
-                    if (await AuthRepository.SignInData(usernameController.text, emailController.text, passwordController.text)) {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => const AuthWidget(),
+                    //вынести в блок
+                    if (await AuthRepository.SignInData(usernameController.text,
+                        emailController.text, passwordController.text)) {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(
+                          content: Text(
+                            "Ссылка для подтверждения отправлена на ${emailController.text}",
+                            style: const TextStyle(color: Colors.white),
+                          ),
+                          backgroundColor: Colors.grey,
+                          duration: const Duration(seconds: 2),
                         ),
                       );
-                    } else {
-                      //todo
+                      Future.delayed(Duration(seconds: 2), () {
+                        Navigator.pushNamed(context, "/log_in");
+                      });
                     }
+                  } else {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(
+                        content: Text(
+                          "Возникла ошибка",
+                          style: TextStyle(color: Colors.white),
+                        ),
+                        backgroundColor: Colors.grey,
+                        duration: Duration(seconds: 2),
+                      ),
+                    );
                   }
                 },
                 bckgroundColor: Colors.red,

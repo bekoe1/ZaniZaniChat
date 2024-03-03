@@ -2,7 +2,11 @@ import 'package:dio/dio.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 import 'package:web_socket_channel/web_socket_channel.dart';
 import 'package:web_socket_channel/status.dart' as status;
-
+///
+/// Не используется в приложении
+/// Только для теста сетевых функций
+///
+///
 class NetworkHelper {
   static final Dio dio = Dio()
     ..interceptors.add(PrettyDioLogger(

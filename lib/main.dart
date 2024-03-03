@@ -1,13 +1,16 @@
+import 'dart:developer';
+
 import 'package:bloc_test_app/presentation/pages/dialogs_page/dialogs.page.dart';
 import 'package:bloc_test_app/presentation/pages/login_page/login_page.dart';
+import 'package:bloc_test_app/presentation/pages/sign_in_page/sign_in_page.dart';
+import 'package:bloc_test_app/utils/internal_storage_helper.dart';
 
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  SharedPreferences prefs = await SharedPreferences.getInstance();
-  String? token = prefs.getString('Session');
+  final token = await SharedPrefsHelper.GetSessionToken();
 
   runApp(MyApp(token: token));
 }
@@ -19,7 +22,13 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    log(token ?? "no data");
     return MaterialApp(
-        home: token == null ? const AuthWidget() :  DialogsPage(token: token!));
+        initialRoute: '/',
+        routes: {
+          '/sign_in': (context) => const SignInPage(),
+          '/log_in': (context) => const LogInPage(),
+        },
+        home: token == null ? const LogInPage() : DialogsPage(token: token!));
   }
 }
