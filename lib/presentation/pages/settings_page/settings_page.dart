@@ -1,4 +1,4 @@
-import 'package:bloc_test_app/data/repo/auth_repo/auth_repo.dart';
+import 'package:bloc_test_app/data/repo/auth_repo.dart';
 import 'package:bloc_test_app/utils/buttons.dart';
 import 'package:flutter/material.dart';
 

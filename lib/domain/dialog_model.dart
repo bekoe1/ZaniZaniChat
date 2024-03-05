@@ -1,0 +1,3 @@
+class DialogModel{
+  //todo
+}

@@ -29,6 +29,7 @@ class MyApp extends StatelessWidget {
           '/sign_in': (context) => const SignInPage(),
           '/log_in': (context) => const LogInPage(),
         },
-        home: token == null ? const LogInPage() : DialogsPage(token: token!));
+        // home: token == null ? const LogInPage() : DialogsPage(token: token!));
+        home: DialogsPage(token: "333"));
   }
 }

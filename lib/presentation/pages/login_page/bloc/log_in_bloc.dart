@@ -1,11 +1,8 @@
-import 'dart:async';
 
 import 'package:bloc/bloc.dart';
-import 'package:bloc_test_app/data/repo/auth_repo/auth_repo.dart';
+import 'package:bloc_test_app/data/repo/auth_repo.dart';
 import 'package:bloc_test_app/utils/internal_storage_helper.dart';
 import 'package:meta/meta.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-
 import '../../../../utils/form_submission_status.dart';
 
 part 'log_in_event.dart';
