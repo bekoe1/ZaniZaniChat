@@ -9,21 +9,12 @@
     <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="62d1af30-4240-4ec3-a0cc-7b4bce47f66e" name="Changes" comment="LogOut">
+    <list default="true" id="62d1af30-4240-4ec3-a0cc-7b4bce47f66e" name="Changes" comment="some refactoring">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/bloc/log_in/log_in_bloc.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/presentation/pages/login_page/bloc/log_in_bloc.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/bloc/log_in/log_in_event.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/presentation/pages/login_page/bloc/log_in_event.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/bloc/log_in/log_in_state.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/presentation/pages/login_page/bloc/log_in_state.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/bloc/sign_in/sign_in_bloc.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/presentation/pages/sign_in_page/Bloc/sign_in_bloc.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/bloc/sign_in/sign_in_event.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/presentation/pages/sign_in_page/Bloc/sign_in_event.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/bloc/sign_in/sign_in_state.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/presentation/pages/sign_in_page/Bloc/sign_in_state.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/data/repo/auth_repo/auth_repo.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/data/repo/auth_repo/auth_repo.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/data/repo/auth_repo.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/data/repo/auth_repo.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/main.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/main.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/presentation/pages/dialogs_page/dialogs.page.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/presentation/pages/dialogs_page/dialogs.page.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/presentation/pages/login_page/login_page.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/presentation/pages/login_page/login_page.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/presentation/pages/sign_in_page/sign_in_page.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/presentation/pages/sign_in_page/sign_in_page.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/utils/network/form_submission_status.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/utils/form_submission_status.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/utils/network/test_network.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/utils/network/test_network.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/utils/validation.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/utils/validation.dart" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -68,6 +59,7 @@
 }</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\zabul\Documents\GitHub\ZaniZaniChat\lib\data\repo" />
       <recent name="C:\Users\zabul\Documents\GitHub\ZaniZaniChat\lib\utils" />
       <recent name="C:\Users\zabul\Documents\GitHub\ZaniZaniChat\lib\presentation\pages\login_page\bloc" />
       <recent name="C:\Users\zabul\Documents\GitHub\bloc_test_app\lib\bloc\auth" />
@@ -96,12 +88,29 @@
       <option name="project" value="LOCAL" />
       <updated>1709320919154</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="some refactoring">
+      <option name="closed" value="true" />
+      <created>1709457068711</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1709457068711</updated>
+    </task>
+    <task id="LOCAL-00003" summary="some refactoring">
+      <option name="closed" value="true" />
+      <created>1709457081042</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1709457081042</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="LogOut" />
-    <option name="LAST_COMMIT_MESSAGE" value="LogOut" />
+    <MESSAGE value="some refactoring" />
+    <option name="LAST_COMMIT_MESSAGE" value="some refactoring" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

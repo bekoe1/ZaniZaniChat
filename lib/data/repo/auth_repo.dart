@@ -21,7 +21,7 @@ class AuthRepository {
     };
     dio.post(logoutUrl, data: data);
     SharedPrefsHelper.DeleteSession();
-    // exit(0);
+    exit(0);
   }
   static Future<void> ConnectToWebSocket() async {
     final wsUrl = Uri.parse(

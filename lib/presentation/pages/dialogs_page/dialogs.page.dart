@@ -26,9 +26,10 @@ class _DialogsPageState extends State<DialogsPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.black12,
+      backgroundColor: Colors.white12,
       appBar: AppBar(
-        backgroundColor: Colors.white,
+        backgroundColor: Colors.transparent,
+        iconTheme: const IconThemeData(color: Colors.white),
       ),
       drawer: Drawer(
         width: 250,
