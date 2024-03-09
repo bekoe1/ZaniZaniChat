@@ -33,7 +33,7 @@ class AuthRepository {
           .add('{"type": "message", "to": "Vasya", "message": "message"}');
       channel.stream.listen((message) {
         //channel.sink.add('received!');
-        print(message.toString());
+        log(message.toString());
       });
       channel.sink.close();
     }

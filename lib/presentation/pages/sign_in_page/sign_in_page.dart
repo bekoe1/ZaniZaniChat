@@ -66,6 +66,7 @@ class _SignInPageState extends State<SignInPage> {
                   child: Column(
                     children: [
                       CustomTextFormField(
+                        inputType: TextInputType.name,
                         width: 350,
                         validationFunc: (value) {
                           if (Validation.ValidateUsername(value!) != null) {
@@ -87,6 +88,7 @@ class _SignInPageState extends State<SignInPage> {
                         height: 10,
                       ),
                       CustomTextFormField(
+                        inputType: TextInputType.visiblePassword,
                         width: 350,
                         validationFunc: (value) {
                           if (Validation.ValidatePass(value!) != null) {
@@ -119,6 +121,7 @@ class _SignInPageState extends State<SignInPage> {
                         height: 10,
                       ),
                       CustomTextFormField(
+                        inputType: TextInputType.emailAddress,
                         validationFunc: (value) {
                           if (Validation.ValidateEmail(value!) != null) {
                             return Validation.ValidateEmail(value);

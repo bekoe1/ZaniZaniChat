@@ -32,7 +32,7 @@ class _LogInPageState extends State<LogInPage> {
       child: Scaffold(
         backgroundColor: Colors.white10,
         body: GestureDetector(
-          onTap: (){
+          onTap: () {
             FocusScope.of(context).requestFocus(FocusNode());
           },
           child: SingleChildScrollView(
@@ -66,9 +66,11 @@ class _LogInPageState extends State<LogInPage> {
                       BlocBuilder<LogInBloc, LogInState>(
                         builder: (context, state) {
                           return CustomTextFormField(
+                            inputType: TextInputType.name,
                             onChanged: (name) {
-                              context.read<LogInBloc>().add(LoginUsernameChanged(
-                                  username: usernameController.text));
+                              context.read<LogInBloc>().add(
+                                  LoginUsernameChanged(
+                                      username: usernameController.text));
                             },
                             width: 350,
                             validationFunc: (value) {
@@ -90,6 +92,7 @@ class _LogInPageState extends State<LogInPage> {
                       BlocBuilder<LogInBloc, LogInState>(
                         builder: (context, state) {
                           return CustomTextFormField(
+                              inputType: TextInputType.visiblePassword,
                               width: 350,
                               validationFunc: (value) {
                                 if (Validation.ValidatePass(value!) != null) {
@@ -102,8 +105,9 @@ class _LogInPageState extends State<LogInPage> {
                               obscuringPass: obscuringPassword,
                               suffixIcon: obscuringIcon,
                               onChanged: (name) {
-                                context.read<LogInBloc>().add(LoginPasswordChanged(
-                                    password: passwordController.text));
+                                context.read<LogInBloc>().add(
+                                    LoginPasswordChanged(
+                                        password: passwordController.text));
                               },
                               action: () {
                                 setState(() {

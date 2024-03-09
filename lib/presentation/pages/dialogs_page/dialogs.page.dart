@@ -1,3 +1,6 @@
+import 'dart:developer';
+
+import 'package:bloc_test_app/presentation/pages/current_dialog_page/current_dialog_page.dart';
 import 'package:bloc_test_app/presentation/pages/dialogs_page/bloc/dialogs_bloc.dart';
 import 'package:bloc_test_app/presentation/pages/settings_page/settings_page.dart';
 import 'package:flutter/material.dart';
@@ -15,7 +18,8 @@ class DialogsPage extends StatefulWidget {
 }
 
 class _DialogsPageState extends State<DialogsPage> {
-  List<String> chats = ["","","","","",""];
+  List<String> chats = ["", "", "", "", "", ""];
+
   @override
   void initState() {
     //final bloc = BlocProvider.of<DialogsBloc>(context);
@@ -71,30 +75,37 @@ class _DialogsPageState extends State<DialogsPage> {
           itemBuilder: (context, index) {
             return Column(
               children: [
-                Slidable(
-                  endActionPane: ActionPane(
-                    motion: const ScrollMotion(),
-                    children: [
-                      SlidableAction(
-                        onPressed:(BuildContext context){
-                          setState(() {
-                            chats.removeAt(index);
-                          });
-                        },//todo
-                        icon: Icons.delete,
-                        spacing: 1,
-                        autoClose: true,
-                        backgroundColor: Colors.grey,
-                        foregroundColor: Colors.black,
-                      ),
-                    ],
-                  ),
-                  child: const Padding(
-                    padding: EdgeInsets.symmetric(vertical: 10),
-                    child: SizedBox(
-                      height: 50,
-                      child: Placeholder(
-                        color: Colors.red,
+                GestureDetector(
+                  onTap: () {
+                    Navigator.of(context).push(MaterialPageRoute(builder: (_)=> CurrentDialog()));
+                  },
+                  child: Slidable(
+                    endActionPane: ActionPane(
+                      motion: const ScrollMotion(),
+                      children: [
+                        SlidableAction(
+                          onPressed: (BuildContext context) {
+                            setState(() {
+                              chats.removeAt(index);
+                            });
+                          },
+                          //todo
+                          icon: Icons.delete,
+                          spacing: 1,
+                          autoClose: true,
+                          backgroundColor: Colors.grey,
+                          foregroundColor: Colors.black,
+                        ),
+                      ],
+                    ),
+                    child: const Padding(
+                      padding: EdgeInsets.symmetric(vertical: 10),
+                      child: SizedBox(
+                        height: 50,
+                        child: Placeholder(
+                          color: Colors.red,
+                          //test
+                        ),
                       ),
                     ),
                   ),
