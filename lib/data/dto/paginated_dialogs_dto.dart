@@ -3,5 +3,8 @@
 // part 'paginated_dialogs_dto.freezed.dart';
 //
 // class PaginatedDialogsDto with _$PaginatedDialogsDto{
-//   //todo
+//   const factory PaginatedDialogsDto({
+//     required int chat_id,
+//     required
+//   })
 // }

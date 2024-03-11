@@ -1,6 +1,6 @@
 abstract class FormSubmissionStatus {
   const FormSubmissionStatus({this.exception});
-  final Exception? exception;
+  final String? exception;
 }
 
 class InitialFormStatus extends FormSubmissionStatus {

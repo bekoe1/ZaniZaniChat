@@ -42,7 +42,7 @@ class SignInBloc extends Bloc<SignInEvent, SignInState> {
         }
       }
       catch(e){
-        log(e.toString());
+        emit(state.copyWith(status: SubmissionFailed(exc: e.toString())));
       }
     }
   }

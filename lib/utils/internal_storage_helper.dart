@@ -8,6 +8,10 @@ class SharedPrefsHelper {
     return prefs.getString(sessionName);
   }
 
+  static Future<bool> IsSessionInStorage() async{
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    return prefs.containsKey(sessionName);
+  }
   static Future<void> DeleteSession() async{
     SharedPreferences prefs = await SharedPreferences.getInstance();
     prefs.remove(sessionName);

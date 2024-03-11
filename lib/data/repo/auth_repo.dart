@@ -15,13 +15,15 @@ class AuthRepository {
       requestBody: true,
     ));
   static Future<void> LogOut() async{
-    final logoutUrl = "http://147.45.74.185:8000/logout";
+    const logoutUrl = "http://147.45.74.185:8000/logout";
+    final token = await SharedPrefsHelper.GetSessionToken();
+
     Map<String, dynamic> data = {
-      "session" : SharedPrefsHelper.sessionName
-    };
-    dio.post(logoutUrl, data: data);
-    SharedPrefsHelper.DeleteSession();
-    exit(0);
+      "session" : token
+    };SharedPrefsHelper.DeleteSession();
+    await dio.post(logoutUrl, data: data);
+    log(token!);
+    //exit(0);
   }
   static Future<void> ConnectToWebSocket() async {
     final wsUrl = Uri.parse(

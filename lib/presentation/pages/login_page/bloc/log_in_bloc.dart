@@ -1,4 +1,6 @@
 
+import 'dart:developer';
+
 import 'package:bloc/bloc.dart';
 import 'package:bloc_test_app/data/repo/auth_repo.dart';
 import 'package:bloc_test_app/utils/internal_storage_helper.dart';
@@ -39,7 +41,8 @@ class LogInBloc extends Bloc<LogInEvent, LogInState> {
         }
         emit(state.copyWith(status: SubmissionSuccess()));
       } catch (e) {
-        emit(state.copyWith(status: SubmissionFailed(exc: e)));
+        emit(state.copyWith(status: SubmissionFailed(exc: e.toString())));
+        log(state.status.toString());
       }
     }
   }

@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:bloc_test_app/presentation/pages/sign_in_page/Bloc/sign_in_bloc.dart';
 import 'package:bloc_test_app/utils/form_submission_status.dart';
 import 'package:bloc_test_app/utils/snack_bar.dart';
@@ -66,6 +68,8 @@ class _SignInPageState extends State<SignInPage> {
                   child: Column(
                     children: [
                       CustomTextFormField(
+                        fillColor: Colors.white54,
+                        filled: true,
                         inputType: TextInputType.name,
                         width: 350,
                         validationFunc: (value) {
@@ -88,6 +92,8 @@ class _SignInPageState extends State<SignInPage> {
                         height: 10,
                       ),
                       CustomTextFormField(
+                        fillColor: Colors.white54,
+                        filled: true,
                         inputType: TextInputType.visiblePassword,
                         width: 350,
                         validationFunc: (value) {
@@ -121,6 +127,8 @@ class _SignInPageState extends State<SignInPage> {
                         height: 10,
                       ),
                       CustomTextFormField(
+                        fillColor: Colors.white54,
+                        filled: true,
                         inputType: TextInputType.emailAddress,
                         validationFunc: (value) {
                           if (Validation.ValidateEmail(value!) != null) {
@@ -149,8 +157,8 @@ class _SignInPageState extends State<SignInPage> {
                     func: () async {
                       if (formKey.currentState!.validate()) {
                         (context).read<SignInBloc>().add(SignInDone());
-                        if (context.read<SignInBloc>().state.status ==
-                            SubmissionSuccess) {
+                        if (context.read<SignInBloc>().state.status
+                            is SubmissionSuccess) {
                           ScaffoldMessenger.of(context).showSnackBar(
                             SnackBar(
                               content: Text(
@@ -164,18 +172,35 @@ class _SignInPageState extends State<SignInPage> {
                           Future.delayed(const Duration(seconds: 2), () {
                             Navigator.pushNamed(context, "/log_in");
                           });
+                        } else {
+                          log((context)
+                              .read<SignInBloc>()
+                              .state
+                              .status
+                              .toString());
+                        }
+                        if ((context).read<SignInBloc>().state.status
+                            is SubmissionFailed) {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(
+                              content: Text(
+                                (context)
+                                    .read<SignInBloc>()
+                                    .state
+                                    .status
+                                    .exception!,
+                                style: const TextStyle(color: Colors.white),
+                              ),
+                              backgroundColor: Colors.grey,
+                              duration: const Duration(seconds: 2),
+                            ),
+                          );
                         }
                       } else {
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          const SnackBar(
-                            content: Text(
-                              "Возникла ошибка",
-                              style: TextStyle(color: Colors.white),
-                            ),
-                            backgroundColor: Colors.grey,
-                            duration: Duration(seconds: 2),
-                          ),
-                        );
+                        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                          content: Text("Введите корректные данные"),
+                          backgroundColor: Colors.white54,
+                        ));
                       }
                     },
                     bckgroundColor: Colors.red,

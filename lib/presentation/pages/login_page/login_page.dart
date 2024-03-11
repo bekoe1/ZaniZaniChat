@@ -1,5 +1,8 @@
+import 'dart:developer';
+
 import 'package:bloc_test_app/presentation/pages/login_page/bloc/log_in_bloc.dart';
 import 'package:bloc_test_app/utils/form_submission_status.dart';
+import 'package:bloc_test_app/utils/internal_storage_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -20,10 +23,6 @@ class _LogInPageState extends State<LogInPage> {
   bool obscuringPassword = true;
   IconData obscuringIcon = Icons.visibility_off;
   final formKey = GlobalKey<FormState>();
-  final snackBar = const SnackBar(
-    backgroundColor: Colors.white54,
-    content: Text("Введите корректные данные!"),
-  );
 
   @override
   Widget build(BuildContext context) {
@@ -66,6 +65,8 @@ class _LogInPageState extends State<LogInPage> {
                       BlocBuilder<LogInBloc, LogInState>(
                         builder: (context, state) {
                           return CustomTextFormField(
+                            filled: true,
+                            fillColor: Colors.white54,
                             inputType: TextInputType.name,
                             onChanged: (name) {
                               context.read<LogInBloc>().add(
@@ -93,6 +94,8 @@ class _LogInPageState extends State<LogInPage> {
                         builder: (context, state) {
                           return CustomTextFormField(
                               inputType: TextInputType.visiblePassword,
+                              filled: true,
+                              fillColor: Colors.white54,
                               width: 350,
                               validationFunc: (value) {
                                 if (Validation.ValidatePass(value!) != null) {
@@ -123,24 +126,45 @@ class _LogInPageState extends State<LogInPage> {
                   ),
                 ),
                 const SizedBox(height: 20),
-                BlocBuilder<LogInBloc, LogInState>(
-                  builder: (context, state) {
-                    return state.status is FormSubmitting
-                        ? const CircularProgressIndicator(
-                            color: Colors.white,
-                            backgroundColor: Colors.red,
-                          )
-                        : CustomElevatedButton(
-                            text: "Войти",
-                            fontSize: 20,
-                            func: () async {
+                BlocConsumer<LogInBloc, LogInState>(builder: (context, state) {
+                  return state.status is FormSubmitting
+                      ? const CircularProgressIndicator(
+                          color: Colors.white,
+                          backgroundColor: Colors.red,
+                        )
+                      : CustomElevatedButton(
+                          text: "Войти",
+                          fontSize: 20,
+                          func: () {
+                            if (formKey.currentState!.validate()) {
                               context.read<LogInBloc>().add(LoginDone());
-                            },
-                            bckgroundColor: Colors.red,
-                            textColor: Colors.white,
-                          );
-                  },
-                ),
+                            } else {
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                const SnackBar(
+                                  content: Text("Введите корректные данные"),
+                                  backgroundColor: Colors.white54,
+                                ),
+                              );
+                            }
+                          },
+                          bckgroundColor: Colors.red,
+                          textColor: Colors.white,
+                        );
+                }, listener: (context, state) {
+                  if (formKey.currentState!.validate()) {
+                    if (state.status is LogInSubmitted) {
+                      Navigator.pushNamed(context, "/dialogs");
+                    }
+                    if (state.status is SubmissionFailed) {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(
+                          content: Text(state.status.exception!),
+                          backgroundColor: Colors.white54,
+                        ),
+                      );
+                    }
+                  }
+                }),
                 const SizedBox(height: 20),
                 const Row(
                   children: [

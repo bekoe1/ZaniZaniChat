@@ -6,18 +6,21 @@ import 'package:bloc_test_app/presentation/pages/sign_in_page/sign_in_page.dart'
 import 'package:bloc_test_app/utils/internal_storage_helper.dart';
 
 import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   final token = await SharedPrefsHelper.GetSessionToken();
-
+  final bool tk = await SharedPrefsHelper.IsSessionInStorage();
+  if(tk == true) {
+    log("da");
+  } else {
+    log("net");
+  }
   runApp(MyApp(token: token));
 }
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key, this.token});
-
   final String? token;
 
   @override
@@ -28,8 +31,9 @@ class MyApp extends StatelessWidget {
         routes: {
           '/sign_in': (context) => const SignInPage(),
           '/log_in': (context) => const LogInPage(),
+          '/dialogs' : (context) =>  DialogsPage(),
         },
-        //home: token == null ? const LogInPage() : DialogsPage(token: token!));
-        home: DialogsPage(token: "333"));
+        //home: token == null ? const LogInPage() : DialogsPage());
+       home: DialogsPage());
   }
 }

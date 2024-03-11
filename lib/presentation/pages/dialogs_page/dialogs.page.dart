@@ -9,9 +9,7 @@ import 'package:flutter_slidable/flutter_slidable.dart';
 
 class DialogsPage extends StatefulWidget {
   //сделать,чтобы принимал id
-  const DialogsPage({super.key, required this.token});
-
-  final String token;
+  const DialogsPage({super.key});
 
   @override
   State<DialogsPage> createState() => _DialogsPageState();
@@ -26,7 +24,7 @@ class _DialogsPageState extends State<DialogsPage> {
     //bloc.add(ConnectionToServerEvent);
     super.initState();
   }
-
+ 
   @override
   Widget build(BuildContext context) {
     return Scaffold(

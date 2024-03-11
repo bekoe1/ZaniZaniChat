@@ -18,9 +18,10 @@ class CustomTextFormField extends StatelessWidget {
     this.filled,
     this.hoverColor,
     this.maxLines,
-    required this.inputType, this.onSaved,
+    required this.inputType,
+    this.onSaved,
+    this.textColor,
   });
-
 
   final String? errorText;
   final String? labelText;
@@ -35,13 +36,13 @@ class CustomTextFormField extends StatelessWidget {
   final bool obscuringPass;
   final bool? filled;
   final int? maxLines;
-
+  final Color? textColor;
   final String? Function(String?)? validationFunc;
   final double width;
   final Color? hoverColor;
   final OutlineInputBorder _typicalBorder = OutlineInputBorder(
     borderRadius: BorderRadius.circular(20.0),
-    borderSide: const BorderSide(color: Colors.white, width: 3),
+    borderSide: const BorderSide(color: Colors.transparent, width: 3),
   );
   final TextInputType inputType;
   final OutlineInputBorder _typicalErrorBorder = OutlineInputBorder(
@@ -57,7 +58,7 @@ class CustomTextFormField extends StatelessWidget {
         onSaved: onSaved,
         textInputAction: TextInputAction.newline,
         minLines: 1,
-        maxLines: maxLines ?? 5,
+        maxLines: maxLines ?? 1,
         onChanged: onChanged,
         style: const TextStyle(
           color: Colors.black,
@@ -74,13 +75,13 @@ class CustomTextFormField extends StatelessWidget {
           errorStyle: const TextStyle(color: Colors.red, fontSize: 13),
           filled: filled ?? false,
           hintText: labelText,
-          hintStyle: const TextStyle(
+          hintStyle: TextStyle(
             fontWeight: FontWeight.w500,
-            color: Colors.black45,
+            color: textColor?? Colors.black,
             fontSize: 20,
           ),
-          enabledBorder: filled == false ? _typicalBorder : null,
-          focusedBorder: filled == false ? _typicalBorder : null,
+          enabledBorder: _typicalBorder,
+          focusedBorder: _typicalBorder,
           contentPadding: const EdgeInsets.all(10),
           prefixIcon: Icon(icon),
           suffixIcon: IconButton(
