@@ -12,3 +12,4 @@ class UserDto with _$UserDto {
     required int id,
   }) = _UserDto;
 }
+

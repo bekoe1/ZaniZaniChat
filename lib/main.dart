@@ -33,7 +33,7 @@ class MyApp extends StatelessWidget {
           '/log_in': (context) => const LogInPage(),
           '/dialogs' : (context) =>  DialogsPage(),
         },
-        //home: token == null ? const LogInPage() : DialogsPage());
-       home: DialogsPage());
+        home: token == null ? const LogInPage() : DialogsPage());
+       //home: DialogsPage());
   }
 }

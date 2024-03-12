@@ -35,11 +35,13 @@ class LogInBloc extends Bloc<LogInEvent, LogInState> {
         response =
             await AuthRepository.LogInData(state.username, state.password);
         if (response != null) {
-          SharedPrefsHelper.SetSessionToken(response.toString());
+          final session = response.toString().substring(10, response.toString().length - 1);
+          SharedPrefsHelper.SetSessionToken(session);
+          emit(state.copyWith(status: SubmissionSuccess()));
+          log(state.status.toString());
         } else {
           throw "Сервер не вернул токен";
         }
-        emit(state.copyWith(status: SubmissionSuccess()));
       } catch (e) {
         emit(state.copyWith(status: SubmissionFailed(exc: e.toString())));
         log(state.status.toString());

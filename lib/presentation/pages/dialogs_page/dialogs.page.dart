@@ -7,6 +7,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 
+import '../../../data/repo/dialogs_repo.dart';
+
 class DialogsPage extends StatefulWidget {
   //сделать,чтобы принимал id
   const DialogsPage({super.key});
@@ -75,7 +77,8 @@ class _DialogsPageState extends State<DialogsPage> {
               children: [
                 GestureDetector(
                   onTap: () {
-                    Navigator.of(context).push(MaterialPageRoute(builder: (_)=> CurrentDialog()));
+                    DialogsRepo.GetDialogs(0);
+                    // Navigator.of(context).push(MaterialPageRoute(builder: (_)=> CurrentDialog()));
                   },
                   child: Slidable(
                     endActionPane: ActionPane(

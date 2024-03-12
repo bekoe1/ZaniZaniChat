@@ -1,4 +1,3 @@
-
 import 'dart:io';
 import 'dart:developer';
 import 'package:bloc_test_app/utils/internal_storage_helper.dart';
@@ -8,23 +7,25 @@ import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 import 'package:web_socket_channel/web_socket_channel.dart';
 import 'package:web_socket_channel/status.dart' as status;
 import 'package:shared_preferences/shared_preferences.dart';
+
 class AuthRepository {
   static final Dio dio = Dio()
     ..interceptors.add(PrettyDioLogger(
       requestHeader: true,
       requestBody: true,
     ));
-  static Future<void> LogOut() async{
+
+  static Future<void> LogOut() async {
     const logoutUrl = "http://147.45.74.185:8000/logout";
     final token = await SharedPrefsHelper.GetSessionToken();
 
-    Map<String, dynamic> data = {
-      "session" : token
-    };SharedPrefsHelper.DeleteSession();
+    Map<String, dynamic> data = {"session": token};
+    SharedPrefsHelper.DeleteSession();
     await dio.post(logoutUrl, data: data);
     log(token!);
     //exit(0);
   }
+
   static Future<void> ConnectToWebSocket() async {
     final wsUrl = Uri.parse(
         'ws://147.45.74.185:8000/websocket/messages?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6Ik9wZXIiLCJleHAiOjE3MDkwNTg2NDF9.r_pWEY33C15GEXuo2oIbcYYKTfTDMRG0D-5ra4iH7Fg');
@@ -45,16 +46,15 @@ class AuthRepository {
     Map<String, dynamic> data = {
       "username": username,
       "password": password,
-      "device_info" : "dd",
+      "device_info": "dd",
     };
     try {
       Response response =
           await dio.post('http://147.45.74.185:8000/new_session', data: data);
 
-      if (response.statusCode == 200) {
+      if (response.statusCode == 201) {
         return response.data.toString();
       }
-
     } catch (e) {
       return null;
     }

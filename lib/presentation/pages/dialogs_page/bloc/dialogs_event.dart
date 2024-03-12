@@ -3,10 +3,11 @@ part of 'dialogs_bloc.dart';
 @immutable
 abstract class DialogsEvent {}
 
-class FetchDialogsEvent extends DialogsEvent {}
+class FetchDialogsEvent extends DialogsEvent {
+  final int page;
 
-class ConnectToServerEvent extends DialogsEvent {
-  final BuildContext context;
-
-  ConnectToServerEvent(this.context);
+  FetchDialogsEvent(this.page);
 }
+
+
+
