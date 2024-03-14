@@ -9,5 +9,8 @@ class FetchDialogsEvent extends DialogsEvent {
   FetchDialogsEvent(this.page);
 }
 
+class DeleteMessageEvent extends DialogsEvent {
+  final String chatId;
 
-
+  DeleteMessageEvent({required this.chatId});
+}

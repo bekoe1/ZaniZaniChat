@@ -1,13 +1,11 @@
-import 'dart:developer';
-
-import 'package:bloc_test_app/presentation/pages/current_dialog_page/current_dialog_page.dart';
+import 'package:bloc_test_app/domain/dialog_model.dart';
 import 'package:bloc_test_app/presentation/pages/dialogs_page/bloc/dialogs_bloc.dart';
-import 'package:bloc_test_app/presentation/pages/settings_page/settings_page.dart';
+import 'package:bloc_test_app/utils/drawer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 
-import '../../../data/repo/dialogs_repo.dart';
+import 'displayed_dialogs.dart';
 
 class DialogsPage extends StatefulWidget {
   //сделать,чтобы принимал id
@@ -18,102 +16,80 @@ class DialogsPage extends StatefulWidget {
 }
 
 class _DialogsPageState extends State<DialogsPage> {
-  List<String> chats = ["", "", "", "", "", ""];
-
-  @override
-  void initState() {
-    //final bloc = BlocProvider.of<DialogsBloc>(context);
-    //bloc.add(ConnectionToServerEvent);
-    super.initState();
-  }
- 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.white12,
-      appBar: AppBar(
-        backgroundColor: Colors.transparent,
-        iconTheme: const IconThemeData(color: Colors.white),
-      ),
-      drawer: Drawer(
-        width: 250,
-        backgroundColor: Colors.grey,
-        child: ListView(children: [
-          const UserAccountsDrawerHeader(
-            accountName: Text("blabla"),
-            accountEmail: Text(""),
-            margin: EdgeInsets.only(bottom: 0),
-          ),
-          const ListTile(
-            title: Text("first"),
-            trailing: Icon(Icons.safety_check),
-          ),
-          const ListTile(
-            title: Text("second"),
-            trailing: Icon(Icons.safety_check),
-          ),
-          const ListTile(
-            title: Text("third"),
-            trailing: Icon(Icons.safety_check),
-          ),
-          ListTile(
-            title: const Text("Настройки"),
-            trailing: const Icon(Icons.settings),
-            onTap: () {
-              Navigator.pop(context);
-              Navigator.of(context).push(
-                MaterialPageRoute(
-                  builder: (context) => const SettingsPage(),
-                ),
-              );
-            },
-          ),
-        ]),
-      ),
-      body: ListView.builder(
-          itemCount: chats.length,
-          itemBuilder: (context, index) {
-            return Column(
-              children: [
-                GestureDetector(
-                  onTap: () {
-                    DialogsRepo.GetDialogs(0);
-                    // Navigator.of(context).push(MaterialPageRoute(builder: (_)=> CurrentDialog()));
-                  },
-                  child: Slidable(
-                    endActionPane: ActionPane(
-                      motion: const ScrollMotion(),
-                      children: [
-                        SlidableAction(
-                          onPressed: (BuildContext context) {
-                            setState(() {
-                              chats.removeAt(index);
-                            });
-                          },
-                          //todo
-                          icon: Icons.delete,
-                          spacing: 1,
-                          autoClose: true,
-                          backgroundColor: Colors.grey,
-                          foregroundColor: Colors.black,
+    return BlocProvider(
+      create: (_) => DialogsBloc()..add(FetchDialogsEvent(0)),
+      child: BlocBuilder<DialogsBloc, DialogsState>(
+        builder: (context, state) {
+          if (state is FetchedDialogsState) {
+            List<DialogModel>? dialogs = state.dialogs.dialogs;
+            return Scaffold(
+              backgroundColor: Colors.white12,
+              appBar: AppBar(
+                backgroundColor: Colors.transparent,
+                iconTheme: const IconThemeData(color: Colors.white),
+              ),
+              drawer: DrawerWidget(name: state.dialogs.dialogs[0].sender),
+              body: ListView.builder(
+                itemCount: state.dialogs.dialogs.length ?? 0,
+                itemBuilder: (context, index) {
+                  return Column(
+                    children: [
+                      Slidable(
+                        endActionPane: ActionPane(
+                          motion: const ScrollMotion(),
+                          children: [
+                            SlidableAction(
+                              onPressed: (BuildContext context) {
+                                //  todo delete method
+                              },
+                              icon: Icons.delete,
+                              spacing: 1,
+                              autoClose: true,
+                              backgroundColor: Colors.grey,
+                              foregroundColor: Colors.black,
+                            ),
+                          ],
                         ),
-                      ],
-                    ),
-                    child: const Padding(
-                      padding: EdgeInsets.symmetric(vertical: 10),
-                      child: SizedBox(
-                        height: 50,
-                        child: Placeholder(
-                          color: Colors.red,
-                          //test
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(
+                              vertical: 10, horizontal: 10),
+                          child: GestureDetector(
+                            onTap: () {
+                              // Обработка нажатия на диалог
+                              (context).read<DialogsBloc>().add(
+                                  DeleteMessageEvent(
+                                      chatId:
+                                          state.dialogs.dialogs[index].chatId));
+                            },
+                            child: DisplayedDialogWidget(
+                              name: state.dialogs.dialogs[index].dialogsDtoWith
+                                  .username,
+                              message: state.dialogs.dialogs[index].message,
+                              time:
+                                  "${state.dialogs.dialogs[index].time.hour.toString().padLeft(2, '0')}:${state.dialogs.dialogs[index].time.minute.toString().padLeft(2, '0')}",
+                              read: state.dialogs.dialogs[index].read,
+                            ),
+                          ),
                         ),
                       ),
-                    ),
-                  ),
-                ),
-              ],
+                    ],
+                  );
+                },
+              ),
             );
-          }),
+          } else if (state is DialogsInitial) {
+            return const Center(child: CircularProgressIndicator());
+          } else {
+            return const Center(
+                child: Text(
+              "Ошибка",
+              style: TextStyle(color: Colors.white),
+            ));
+          }
+        },
+      ),
     );
   }
 }

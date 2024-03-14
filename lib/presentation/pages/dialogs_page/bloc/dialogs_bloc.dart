@@ -20,6 +20,16 @@ class DialogsBloc extends Bloc<DialogsEvent, DialogsState> {
     if(event is FetchDialogsEvent){
       try{
         final response = await DialogsRepo.GetDialogs(event.page);
+        emit(FetchedDialogsState(dialogs: response));
+      }
+      catch(e){
+        emit(ErrorInFetchingDialogsState(e.toString()));
+      }
+    }
+    if(event is DeleteMessageEvent){
+      try{
+        final response = await DialogsRepo.DeleteDialog(event.chatId);
+        emit(DeletingDone());
       }
       catch(e){
         emit(ErrorInFetchingDialogsState(e.toString()));

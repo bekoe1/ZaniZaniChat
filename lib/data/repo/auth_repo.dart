@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'dart:developer';
 import 'package:bloc_test_app/utils/internal_storage_helper.dart';
+import 'package:bloc_test_app/utils/network/constants.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/services.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
@@ -16,7 +17,7 @@ class AuthRepository {
     ));
 
   static Future<void> LogOut() async {
-    const logoutUrl = "http://147.45.74.185:8000/logout";
+    final logoutUrl = "${ApiConstants.devEndpoint}logout";
     final token = await SharedPrefsHelper.GetSessionToken();
 
     Map<String, dynamic> data = {"session": token};
@@ -28,7 +29,7 @@ class AuthRepository {
 
   static Future<void> ConnectToWebSocket() async {
     final wsUrl = Uri.parse(
-        'ws://147.45.74.185:8000/websocket/messages?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6Ik9wZXIiLCJleHAiOjE3MDkwNTg2NDF9.r_pWEY33C15GEXuo2oIbcYYKTfTDMRG0D-5ra4iH7Fg');
+        'ws${ApiConstants.devEndpoint.replaceAll("https", "")}websocket/messages?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6Ik9wZXIiLCJleHAiOjE3MDkwNTg2NDF9.r_pWEY33C15GEXuo2oIbcYYKTfTDMRG0D-5ra4iH7Fg');
     final channel = WebSocketChannel.connect(wsUrl);
     await channel.ready;
     while (true) {
@@ -50,7 +51,7 @@ class AuthRepository {
     };
     try {
       Response response =
-          await dio.post('http://147.45.74.185:8000/new_session', data: data);
+          await dio.post('${ApiConstants.devEndpoint}session/new', data: data);
 
       if (response.statusCode == 201) {
         return response.data.toString();
@@ -70,7 +71,7 @@ class AuthRepository {
 
     try {
       Response response =
-          await dio.post('http://147.45.74.185:8000/register', data: data);
+          await dio.post('${ApiConstants.devEndpoint}register', data: data);
       if (response.statusCode == 200) {
         return true;
       } else {
