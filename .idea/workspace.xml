@@ -9,32 +9,12 @@
     <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="62d1af30-4240-4ec3-a0cc-7b4bce47f66e" name="Changes" comment="Dialogs response to UI">
-      <change afterPath="$PROJECT_DIR$/lib/data/dto/search_accounts_dto.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/data/dto/search_accounts_dto.g.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/data/mapper/searched_accounts_mapper.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/data/repo/search_repo.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/domain/paginated_searched_account_model.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/domain/searched_account_model.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/presentation/pages/search_page/bloc/search_bloc.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/presentation/pages/search_page/bloc/search_event.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/presentation/pages/search_page/bloc/search_state.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/presentation/pages/search_page/search_page.dart" afterDir="false" />
+    <list default="true" id="62d1af30-4240-4ec3-a0cc-7b4bce47f66e" name="Changes" comment="Account search logic">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/data/dto/dialogs_dto.g.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/data/dto/dialogs_dto.g.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/data/mapper/dialog_mapper.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/data/mapper/dialog_mapper.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/data/repo/dialogs_repo.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/data/repo/dialogs_repo.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/presentation/pages/dialogs_page/bloc/dialogs_bloc.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/presentation/pages/dialogs_page/bloc/dialogs_bloc.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/presentation/pages/dialogs_page/bloc/dialogs_event.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/presentation/pages/dialogs_page/bloc/dialogs_event.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/presentation/pages/dialogs_page/bloc/dialogs_state.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/presentation/pages/dialogs_page/bloc/dialogs_state.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/presentation/pages/dialogs_page/dialogs.page.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/presentation/pages/dialogs_page/dialogs.page.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/presentation/pages/dialogs_page/displayed_dialogs.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/presentation/pages/dialogs_page/widgets/displayed_dialogs.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/presentation/pages/dialogs_page/menu_route.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/presentation/pages/dialogs_page/widgets/menu_route.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/presentation/pages/login_page/bloc/log_in_bloc.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/presentation/pages/login_page/bloc/log_in_bloc.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/presentation/pages/login_page/login_page.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/presentation/pages/login_page/login_page.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/utils/drawer.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/presentation/pages/dialogs_page/widgets/drawer.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/utils/form_submission_status.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/utils/form_submission_status.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/utils/textfields.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/utils/textfields.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/presentation/pages/dialogs_page/widgets/drawer.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/presentation/pages/dialogs_page/widgets/drawer.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/presentation/pages/dialogs_page/widgets/menu_route.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/presentation/pages/dialogs_page/widgets/menu_route.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/presentation/pages/search_page/search_page.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/presentation/pages/search_page/search_page.dart" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -169,7 +149,15 @@
       <option name="project" value="LOCAL" />
       <updated>1710452057517</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="Account search logic">
+      <option name="closed" value="true" />
+      <created>1710617274046</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1710617274047</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -180,7 +168,8 @@
     <MESSAGE value="Auth Ui Errors Fix" />
     <MESSAGE value="Dialogs response done" />
     <MESSAGE value="Dialogs response to UI" />
-    <option name="LAST_COMMIT_MESSAGE" value="Dialogs response to UI" />
+    <MESSAGE value="Account search logic" />
+    <option name="LAST_COMMIT_MESSAGE" value="Account search logic" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

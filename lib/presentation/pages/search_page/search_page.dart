@@ -28,10 +28,14 @@ class _SearchPageState extends State<SearchPage> {
               actions: [
                 CustomTextFormField(
                   onChanged: (text) {
-                    context.read<SearchBloc>().add(FetchProfiles(name: text));
+                    if(text != "") {
+                      context.read<SearchBloc>().add(FetchProfiles(name: text));
+                    }
                   },
                   onSaved: (text) {
-                    context.read<SearchBloc>().add(FetchProfiles(name: text));
+                    if(text != "") {
+                      context.read<SearchBloc>().add(FetchProfiles(name: text));
+                    }
                   },
                   inputAction: TextInputAction.send,
                   obscuringPass: false,

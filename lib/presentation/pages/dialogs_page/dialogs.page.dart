@@ -19,33 +19,19 @@ class DialogsPage extends StatefulWidget {
 }
 
 class _DialogsPageState extends State<DialogsPage> {
-  bool isDrawerPressed = false;
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey();
+
+  bool _isDrawerOpen = false;
 
   @override
   Widget build(BuildContext context) {
-    void drawerClicked() {
-      setState(() {
-        isDrawerPressed = !isDrawerPressed;
-      });
-    }
-
     return BlocProvider(
       create: (_) => DialogsBloc()..add(FetchDialogsEvent(0)),
       child: BlocBuilder<DialogsBloc, DialogsState>(builder: (context, state) {
         return Scaffold(
+          key: _scaffoldKey,
           backgroundColor: Colors.white12,
           appBar: AppBar(
-            // leading: isDrawerPressed == true
-            //     ? Icon(Icons.menu)
-            //     : IconButton(
-            //         icon: const Icon(
-            //           Icons.menu,
-            //           color: Colors.white,
-            //         ),
-            //         onPressed: () {
-            //           Scaffold.of(context).openDrawer();
-            //           drawerClicked();
-            //         }),
             actions: [
               IconButton(
                 onPressed: () {
@@ -61,10 +47,29 @@ class _DialogsPageState extends State<DialogsPage> {
               ),
               const SizedBox(width: 20),
             ],
+            leading: IconButton(
+              icon: Icon(
+                Icons.menu,
+                color:
+                    _isDrawerOpen == true ? Colors.transparent : Colors.white,
+              ),
+              onPressed: () {
+                _scaffoldKey.currentState?.openDrawer();
+              },
+            ),
             backgroundColor: Colors.transparent,
             iconTheme: const IconThemeData(color: Colors.white),
           ),
-          drawer: DrawerWidget(name: state.dialogs?.dialogs[0].sender ?? ""),
+          drawer: DrawerWidget(
+              name: state.dialogs?.dialogs[0].sender ?? "",
+              callback: (isOpen) {
+                print("isOpen ${isOpen}");
+                WidgetsBinding.instance.addPostFrameCallback((_) {
+                  setState(() {
+                    _isDrawerOpen = isOpen;
+                  });
+                });
+              }),
           body: ListView.builder(
               itemCount: state.dialogs?.dialogs.length ?? 0,
               itemBuilder: (context, index) {
