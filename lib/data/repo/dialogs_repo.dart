@@ -10,14 +10,19 @@ import '../../utils/internal_storage_helper.dart';
 import '../../utils/network/constants.dart';
 
 class DialogsRepo {
-  static Future<PaginatedDialogsModel> GetDialogs(int page) async {
+  static Future<PaginatedDialogsModel?> GetDialogs(int page) async {
     final token = await SharedPrefsHelper.GetSessionToken();
-    log(token.toString());
-    Map<String, dynamic> data = {"session": token, "page": page};
+    Map<String, dynamic> data = {
+      "session": token,
+      "page": page,
+    };
     final response = await AuthRepository.dio
         .post("${ApiConstants.devEndpoint}chats/all", data: data);
+    if (response.statusCode == 400) {
+      log("pusto");
+      return null;
+    }
     final List<dynamic> dialogsList = response.data;
-    log("gotovo");
     final List<DialogDto> dialogs =
         dialogsList.map((e) => (DialogDto.fromJson(e))).toList();
     return PaginatedDialogsModel(

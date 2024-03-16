@@ -152,7 +152,8 @@ class _LogInPageState extends State<LogInPage> {
                         );
                 }, listener: (context, state) {
                   if (formKey.currentState!.validate()) {
-                    if (state.status is LogInSubmitted) {
+                    log("zashel");
+                    if (state.status is SubmissionSuccess) {
                       Navigator.pushNamed(context, "/dialogs");
                     }
                     if (state.status is SubmissionFailed) {

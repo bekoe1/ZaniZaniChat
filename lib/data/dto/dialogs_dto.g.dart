@@ -30,12 +30,12 @@ Map<String, dynamic> _$DialogDtoToJson(DialogDto instance) => <String, dynamic>{
       'profile_pic': instance.profilePic,
     };
 
-WithDto _$WithFromJson(Map<String, dynamic> json) => WithDto(
+WithDto _$WithDtoFromJson(Map<String, dynamic> json) => WithDto(
       username: json['username'] as String,
       id: json['id'] as String,
     );
 
-Map<String, dynamic> _$WithToJson(WithDto instance) => <String, dynamic>{
+Map<String, dynamic> _$WithDtoToJson(WithDto instance) => <String, dynamic>{
       'username': instance.username,
       'id': instance.id,
     };

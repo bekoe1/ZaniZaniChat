@@ -25,10 +25,10 @@ class LogInBloc extends Bloc<LogInEvent, LogInState> {
     final response;
     if (event is LoginPasswordChanged) {
       emit(state.copyWith(
-          password: event.password, status: SubmissionSuccess()));
+          password: event.password, status: FormDataEdited()));
     } else if (event is LoginUsernameChanged) {
       emit(state.copyWith(
-          username: event.username, status: SubmissionSuccess()));
+          username: event.username, status: FormDataEdited()));
     } else if (event is LoginDone) {
       emit(state.copyWith(status: FormSubmitting()));
       try {
@@ -40,6 +40,7 @@ class LogInBloc extends Bloc<LogInEvent, LogInState> {
           emit(state.copyWith(status: SubmissionSuccess()));
           log(state.status.toString());
         } else {
+          emit(state.copyWith(status: SubmissionFailed(exc: "Сервер не вернул токен")));
           throw "Сервер не вернул токен";
         }
       } catch (e) {

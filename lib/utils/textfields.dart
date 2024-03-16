@@ -20,7 +20,7 @@ class CustomTextFormField extends StatelessWidget {
     this.maxLines,
     required this.inputType,
     this.onSaved,
-    this.textColor,
+    this.textColor, this.height, this.cursorHeight, this.cursorColor, this.iconColor, this.inputAction,
   });
 
   final String? errorText;
@@ -37,14 +37,19 @@ class CustomTextFormField extends StatelessWidget {
   final bool? filled;
   final int? maxLines;
   final Color? textColor;
+  final Color? iconColor;
   final String? Function(String?)? validationFunc;
   final double width;
   final Color? hoverColor;
+  final double? cursorHeight;
+  final TextInputAction? inputAction;
   final OutlineInputBorder _typicalBorder = OutlineInputBorder(
     borderRadius: BorderRadius.circular(20.0),
     borderSide: const BorderSide(color: Colors.transparent, width: 3),
   );
   final TextInputType inputType;
+  final double? height;
+  final Color? cursorColor;
   final OutlineInputBorder _typicalErrorBorder = OutlineInputBorder(
     borderRadius: BorderRadius.circular(20.0),
     borderSide: const BorderSide(color: Colors.red, width: 3),
@@ -53,21 +58,23 @@ class CustomTextFormField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
+      height: height,
       width: width,
       child: TextFormField(
+        cursorHeight: cursorHeight,
         onSaved: onSaved,
-        textInputAction: TextInputAction.newline,
+        textInputAction:inputAction?? TextInputAction.newline,
         minLines: 1,
         maxLines: maxLines ?? 1,
         onChanged: onChanged,
-        style: const TextStyle(
-          color: Colors.black,
+        style: TextStyle(
+          color: textColor??Colors.black,
           fontWeight: FontWeight.w500,
           fontSize: 20,
         ),
         keyboardType: inputType,
         validator: validationFunc,
-        cursorColor: Colors.black,
+        cursorColor: cursorColor??Colors.black,
         decoration: InputDecoration(
           fillColor: fillColor,
           errorBorder: _typicalErrorBorder,
@@ -75,15 +82,15 @@ class CustomTextFormField extends StatelessWidget {
           errorStyle: const TextStyle(color: Colors.red, fontSize: 13),
           filled: filled ?? false,
           hintText: labelText,
-          hintStyle: TextStyle(
+          hintStyle: const TextStyle(
             fontWeight: FontWeight.w500,
-            color: textColor?? Colors.black,
+            color: Colors.grey,
             fontSize: 20,
           ),
           enabledBorder: _typicalBorder,
           focusedBorder: _typicalBorder,
           contentPadding: const EdgeInsets.all(10),
-          prefixIcon: Icon(icon),
+          prefixIcon: Icon(icon, color: iconColor,),
           suffixIcon: IconButton(
             icon: Icon(suffixIcon),
             onPressed: action,

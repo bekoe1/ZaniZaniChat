@@ -21,6 +21,8 @@ class ErrorInFetchingDialogsState extends DialogsState {
   ErrorInFetchingDialogsState(this.exception);
 }
 
+class NoDialogsState extends DialogsState {}
+
 class ErrorInDeletingMessage extends DialogsState {
   final String? exception;
 
