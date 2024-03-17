@@ -1,15 +1,14 @@
+import 'package:bloc_test_app/utils/internal_storage_helper.dart';
 import 'package:flutter/material.dart';
 
 import '../../settings_page/settings_page.dart';
 
 class DrawerWidget extends StatefulWidget {
-  const DrawerWidget({
+  DrawerWidget({
     super.key,
-    required this.name,
     required this.callback,
   });
 
-  final String name;
   final DrawerCallback callback;
 
   @override
@@ -17,11 +16,21 @@ class DrawerWidget extends StatefulWidget {
 }
 
 class _DrawerWidgetState extends State<DrawerWidget> {
+  late String name;
+
   @override
   void initState() {
     widget.callback(true);
-
     super.initState();
+    SetName();
+  }
+
+  void SetName() {
+    SharedPrefsHelper.GetName().then((nameFromPrefs) {
+      setState(() {
+        name = nameFromPrefs ?? "";
+      });
+    });
   }
 
   @override
@@ -33,34 +42,39 @@ class _DrawerWidgetState extends State<DrawerWidget> {
   @override
   Widget build(BuildContext context) {
     return Drawer(
-      width: 250,
+      width: 300,
       backgroundColor: Colors.white12,
       child: ListView(children: [
-        UserAccountsDrawerHeader(
-          currentAccountPicture: const CircleAvatar(
-            backgroundColor: Colors.white54,
-            maxRadius: 50,
-          ),
-          decoration: const BoxDecoration(
-            gradient: LinearGradient(
-              colors: [
-                Colors.black,
-                Colors.black12,
-                Colors.white10,
-                Colors.white12,
-                Colors.white54,
-                Colors.white70,
-              ],
+        GestureDetector(
+          onTap: () {
+            Navigator.pushNamed(context, '/accountInfo');
+          },
+          child: UserAccountsDrawerHeader(
+            currentAccountPicture: const CircleAvatar(
+              backgroundColor: Colors.white54,
+              maxRadius: 50,
             ),
-          ),
-          accountName: Text(
-            widget.name,
-            style: const TextStyle(
-              fontWeight: FontWeight.w500,
-              fontSize: 20,
+            decoration: const BoxDecoration(
+              gradient: LinearGradient(
+                colors: [
+                  Colors.black,
+                  Colors.black12,
+                  Colors.white10,
+                  Colors.white12,
+                  Colors.white54,
+                  Colors.white70,
+                ],
+              ),
             ),
+            accountName: Text(
+              name,
+              style: const TextStyle(
+                fontWeight: FontWeight.w500,
+                fontSize: 22,
+              ),
+            ),
+            accountEmail: null,
           ),
-          accountEmail: const Text(""),
         ),
         const ListTile(
           title: Text(

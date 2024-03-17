@@ -9,12 +9,25 @@
     <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="62d1af30-4240-4ec3-a0cc-7b4bce47f66e" name="Changes" comment="Account search logic">
+    <list default="true" id="62d1af30-4240-4ec3-a0cc-7b4bce47f66e" name="Changes" comment="Account search logic fix + drawer icon error fix">
+      <change afterPath="$PROJECT_DIR$/lib/presentation/pages/my_account_page/my_account_page.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/main.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/main.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/presentation/pages/dialogs_page/dialogs.page.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/presentation/pages/dialogs_page/dialogs.page.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/presentation/pages/dialogs_page/widgets/drawer.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/presentation/pages/dialogs_page/widgets/drawer.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/presentation/pages/dialogs_page/widgets/menu_route.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/presentation/pages/dialogs_page/widgets/menu_route.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/presentation/pages/login_page/login_page.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/presentation/pages/login_page/login_page.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/presentation/pages/search_page/bloc/search_bloc.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/presentation/pages/search_page/bloc/search_bloc.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/presentation/pages/search_page/bloc/search_event.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/presentation/pages/search_page/bloc/search_event.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/presentation/pages/search_page/bloc/search_state.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/presentation/pages/search_page/bloc/search_state.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/presentation/pages/search_page/search_page.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/presentation/pages/search_page/search_page.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/utils/internal_storage_helper.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/utils/internal_storage_helper.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/linux/flutter/generated_plugin_registrant.cc" beforeDir="false" afterPath="$PROJECT_DIR$/linux/flutter/generated_plugin_registrant.cc" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/linux/flutter/generated_plugins.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/linux/flutter/generated_plugins.cmake" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/macos/Flutter/GeneratedPluginRegistrant.swift" beforeDir="false" afterPath="$PROJECT_DIR$/macos/Flutter/GeneratedPluginRegistrant.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pubspec.lock" beforeDir="false" afterPath="$PROJECT_DIR$/pubspec.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/pubspec.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/windows/flutter/generated_plugin_registrant.cc" beforeDir="false" afterPath="$PROJECT_DIR$/windows/flutter/generated_plugin_registrant.cc" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/windows/flutter/generated_plugins.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/windows/flutter/generated_plugins.cmake" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -157,7 +170,15 @@
       <option name="project" value="LOCAL" />
       <updated>1710617274047</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="Account search logic fix + drawer icon error fix">
+      <option name="closed" value="true" />
+      <created>1710621394535</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1710621394535</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -169,7 +190,8 @@
     <MESSAGE value="Dialogs response done" />
     <MESSAGE value="Dialogs response to UI" />
     <MESSAGE value="Account search logic" />
-    <option name="LAST_COMMIT_MESSAGE" value="Account search logic" />
+    <MESSAGE value="Account search logic fix + drawer icon error fix" />
+    <option name="LAST_COMMIT_MESSAGE" value="Account search logic fix + drawer icon error fix" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

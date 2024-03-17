@@ -9,5 +9,7 @@ class FetchProfiles extends SearchEvent {
   FetchProfiles({required this.name});
 }
 
+class TryToFetchEmptyText extends SearchEvent{
 
+}
 

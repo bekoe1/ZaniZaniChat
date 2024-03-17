@@ -28,13 +28,19 @@ class _SearchPageState extends State<SearchPage> {
               actions: [
                 CustomTextFormField(
                   onChanged: (text) {
-                    if(text != "") {
+                    if (text != "") {
                       context.read<SearchBloc>().add(FetchProfiles(name: text));
+                    }
+                    else{
+                      context.read<SearchBloc>().add(TryToFetchEmptyText());
                     }
                   },
                   onSaved: (text) {
-                    if(text != "") {
+                    if (text != "") {
                       context.read<SearchBloc>().add(FetchProfiles(name: text));
+                    }
+                    else{
+                      context.read<SearchBloc>().add(TryToFetchEmptyText());
                     }
                   },
                   inputAction: TextInputAction.send,
@@ -73,14 +79,23 @@ class _SearchPageState extends State<SearchPage> {
                       itemCount: state.accounts?.results.length ?? 0,
                       itemBuilder: (context, index) {
                         return Padding(
-                          padding: const EdgeInsets.only(left: 15, top: 5, bottom: 5),
+                          padding: const EdgeInsets.only(
+                              left: 15, top: 5, bottom: 5),
                           child: GestureDetector(
-                            onTap: (){
+                            onTap: () {
                               //context.read<SearchBloc>().add(TryingToStartDialog(accountId));
                               //далее происходит попытка достать чат id, если его нет,то
                               //мы создаем новый чат id
                               //из state берем чат id
                               //Navigator.push(context, MaterialPageRoute(builder: (context)=> CurrentDialog(chatId: state.chatId)));
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => CurrentDialog(
+                                      name: state
+                                          .accounts!.results[index].username),
+                                ),
+                              );
                             },
                             child: SizedBox(
                               height: 70,

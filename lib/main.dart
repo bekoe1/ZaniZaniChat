@@ -2,6 +2,7 @@ import 'dart:developer';
 
 import 'package:bloc_test_app/presentation/pages/dialogs_page/dialogs.page.dart';
 import 'package:bloc_test_app/presentation/pages/login_page/login_page.dart';
+import 'package:bloc_test_app/presentation/pages/my_account_page/my_account_page.dart';
 import 'package:bloc_test_app/presentation/pages/sign_in_page/sign_in_page.dart';
 import 'package:bloc_test_app/utils/internal_storage_helper.dart';
 
@@ -31,7 +32,8 @@ class MyApp extends StatelessWidget {
         routes: {
           '/sign_in': (context) => const SignInPage(),
           '/log_in': (context) => const LogInPage(),
-          '/dialogs' : (context) =>  DialogsPage(),
+          '/dialogs' : (context) =>  const DialogsPage(),
+          '/accountInfo' : (context) => const MyAccountPage(),
         },
         home: token == null ? const LogInPage() : DialogsPage());
        //home: DialogsPage());

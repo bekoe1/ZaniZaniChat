@@ -154,6 +154,7 @@ class _LogInPageState extends State<LogInPage> {
                   if (formKey.currentState!.validate()) {
                     log("zashel");
                     if (state.status is SubmissionSuccess) {
+                      SharedPrefsHelper.SetName(state.username);
                       Navigator.pushNamed(context, "/dialogs");
                     }
                     if (state.status is SubmissionFailed) {

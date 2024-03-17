@@ -10,7 +10,7 @@ abstract class SearchState {
 class SearchInitial extends SearchState {
   SearchInitial({super.accounts});
 }
-
+class EmptySearchState extends SearchState{EmptySearchState({super.accounts});}
 class SearchedAccountFoundState extends SearchState {
   SearchedAccountFoundState({super.accounts});
 }

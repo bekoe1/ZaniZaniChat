@@ -60,16 +60,13 @@ class _DialogsPageState extends State<DialogsPage> {
             backgroundColor: Colors.transparent,
             iconTheme: const IconThemeData(color: Colors.white),
           ),
-          drawer: DrawerWidget(
-              name: state.dialogs?.dialogs[0].sender ?? "",
-              callback: (isOpen) {
-                print("isOpen ${isOpen}");
-                WidgetsBinding.instance.addPostFrameCallback((_) {
-                  setState(() {
-                    _isDrawerOpen = isOpen;
-                  });
-                });
-              }),
+          drawer: DrawerWidget(callback: (isOpen) {
+            WidgetsBinding.instance.addPostFrameCallback((_) {
+              setState(() {
+                _isDrawerOpen = isOpen;
+              });
+            });
+          }),
           body: ListView.builder(
               itemCount: state.dialogs?.dialogs.length ?? 0,
               itemBuilder: (context, index) {
