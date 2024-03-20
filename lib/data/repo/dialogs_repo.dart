@@ -5,6 +5,7 @@ import 'package:bloc_test_app/data/mapper/dialog_mapper.dart';
 import 'package:bloc_test_app/data/repo/auth_repo.dart';
 import 'package:bloc_test_app/domain/all_dialogs_model.dart';
 import 'package:bloc_test_app/domain/dialog_model.dart';
+import 'package:dio/dio.dart';
 
 import '../../utils/internal_storage_helper.dart';
 import '../../utils/network/constants.dart';
@@ -32,10 +33,22 @@ class DialogsRepo {
   static Future<void> DeleteDialog(String chatId) async {
     final token = await SharedPrefsHelper.GetSessionToken();
     Map<String, dynamic> data = {
-      "session": token,
       "chat_id": chatId,
     };
     final response = await AuthRepository.dio
-        .post("${ApiConstants.devEndpoint}chats/delete", data: data);
+        .post("${ApiConstants.devEndpoint}chats/delete");
+  }
+
+  static void GetMyProfileInfo() async {
+    final token = await SharedPrefsHelper.GetSessionToken();
+
+    final response =
+        await AuthRepository.dio.get("${ApiConstants.devEndpoint}user/me",
+            options: Options(headers: {
+              'Content-Type': 'application/json',
+              'Authorization': 'Bearer ${token.toString()}',
+              'accept': 'application/json',
+            }));
+    log(token.toString());
   }
 }

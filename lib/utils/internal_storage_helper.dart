@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:shared_preferences/shared_preferences.dart';
 
 class SharedPrefsHelper {
@@ -9,28 +11,39 @@ class SharedPrefsHelper {
     return prefs.getString(sessionName);
   }
 
-  static Future<void> SetName(String value) async{
+  static Future<void> SetName(String value) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     prefs.setString(userName, value);
   }
 
-  static Future<String?> GetName() async{
+  static Future<String?> GetName() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     return prefs.getString(userName);
   }
 
-
-  static Future<bool> IsSessionInStorage() async{
+  static Future<bool> IsSessionInStorage() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     return prefs.containsKey(sessionName);
   }
-  static Future<void> DeleteSession() async{
+
+  static Future<void> DeleteSession() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     prefs.remove(sessionName);
   }
 
-  static Future<void> SetSessionToken(String value) async{
+  static Future<void> SetSessionToken(String value) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     prefs.setString(sessionName, value);
+  }
+
+  static Future<void> GetAllData() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    final List<String> allKeys = prefs.getKeys().toList();
+    for (var element in allKeys) {
+      log(
+        "key: $element \n value: ${prefs.getString(element).toString()}\n",
+      );
+      // prefs.remove(element);
+    }
   }
 }

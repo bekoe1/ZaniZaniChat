@@ -1,13 +1,10 @@
-import 'dart:io';
 import 'dart:developer';
+import 'package:bloc_test_app/data/dto/access_token_dto.dart';
 import 'package:bloc_test_app/utils/internal_storage_helper.dart';
 import 'package:bloc_test_app/utils/network/constants.dart';
 import 'package:dio/dio.dart';
-import 'package:flutter/services.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 import 'package:web_socket_channel/web_socket_channel.dart';
-import 'package:web_socket_channel/status.dart' as status;
-import 'package:shared_preferences/shared_preferences.dart';
 
 class AuthRepository {
   static final Dio dio = Dio()
@@ -17,13 +14,15 @@ class AuthRepository {
     ));
 
   static Future<void> LogOut() async {
-    final logoutUrl = "${ApiConstants.devEndpoint}logout";
+    const logoutUrl = "${ApiConstants.devEndpoint}auth/logout";
     final token = await SharedPrefsHelper.GetSessionToken();
-
-    Map<String, dynamic> data = {"session": token};
+    await dio.delete(logoutUrl,
+        options: Options(headers: {
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer ${token.toString()}',
+          'accept': 'application/json',
+        }));
     SharedPrefsHelper.DeleteSession();
-    await dio.post(logoutUrl, data: data);
-    log(token!);
     //exit(0);
   }
 
@@ -44,17 +43,19 @@ class AuthRepository {
   }
 
   static Future<String?> LogInData(String username, String password) async {
-    Map<String, dynamic> data = {
+    FormData data = FormData.fromMap({
       "username": username,
       "password": password,
-      "device_info": "dd",
-    };
+    });
     try {
       Response response =
-          await dio.post('${ApiConstants.devEndpoint}session/new', data: data);
-
-      if (response.statusCode == 201) {
-        return response.data.toString();
+          await dio.post('${ApiConstants.devEndpoint}auth/token', data: data);
+      if (response.statusCode == 200) {
+        final accessToken = AccessTokenDto.fromJson(response.data);
+        log(accessToken.accessToken.toString());
+        SharedPrefsHelper.SetSessionToken(accessToken.accessToken.toString());
+        log(accessToken.accessToken);
+        return accessToken.accessToken;
       }
     } catch (e) {
       return null;

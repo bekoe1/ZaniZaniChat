@@ -31,7 +31,7 @@ class AccountDto {
     required this.profilePhoto,
   });
 
-  factory AccountDto.fromJson(Map<String, dynamic> json) => _$ResultFromJson(json);
+  factory AccountDto.fromJson(Map<String, dynamic> json) => _$AccountDtoFromJson(json);
 
-  Map<String, dynamic> toJson() => _$ResultToJson(this);
+  Map<String, dynamic> toJson() => _$AccountDtoToJson(this);
 }

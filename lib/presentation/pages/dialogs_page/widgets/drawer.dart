@@ -1,3 +1,4 @@
+import 'package:bloc_test_app/data/repo/dialogs_repo.dart';
 import 'package:bloc_test_app/utils/internal_storage_helper.dart';
 import 'package:flutter/material.dart';
 
@@ -76,15 +77,21 @@ class _DrawerWidgetState extends State<DrawerWidget> {
             accountEmail: null,
           ),
         ),
-        const ListTile(
-          title: Text(
-            "first",
-            style: TextStyle(
-              color: Colors.white,
-              fontSize: 20,
+        GestureDetector(
+          onTap: (){
+              DialogsRepo.GetMyProfileInfo();
+            // SharedPrefsHelper.GetAllData();
+          },
+          child: const ListTile(
+            title: Text(
+              "first",
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 20,
+              ),
             ),
+            trailing: Icon(Icons.safety_check),
           ),
-          trailing: Icon(Icons.safety_check),
         ),
         const ListTile(
           title: Text(

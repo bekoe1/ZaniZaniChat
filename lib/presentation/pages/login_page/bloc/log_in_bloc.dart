@@ -2,6 +2,7 @@
 import 'dart:developer';
 
 import 'package:bloc/bloc.dart';
+import 'package:bloc_test_app/data/dto/access_token_dto.dart';
 import 'package:bloc_test_app/data/repo/auth_repo.dart';
 import 'package:bloc_test_app/utils/internal_storage_helper.dart';
 import 'package:meta/meta.dart';
@@ -35,10 +36,8 @@ class LogInBloc extends Bloc<LogInEvent, LogInState> {
         response =
             await AuthRepository.LogInData(state.username, state.password);
         if (response != null) {
-          final session = response.toString().substring(10, response.toString().length - 1);
-          SharedPrefsHelper.SetSessionToken(session);
+          SharedPrefsHelper.SetSessionToken(response);
           emit(state.copyWith(status: SubmissionSuccess()));
-          log(state.status.toString());
         } else {
           emit(state.copyWith(status: SubmissionFailed(exc: "Сервер не вернул токен")));
           throw "Сервер не вернул токен";

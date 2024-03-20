@@ -18,13 +18,14 @@ Map<String, dynamic> _$SearchAccountsDtoToJson(SearchAccountsDto instance) =>
       'results': instance.results,
     };
 
-AccountDto _$ResultFromJson(Map<String, dynamic> json) => AccountDto(
+AccountDto _$AccountDtoFromJson(Map<String, dynamic> json) => AccountDto(
       username: json['username'] as String,
       id: json['_id'] as String,
       profilePhoto: json['profile_photo'],
     );
 
-Map<String, dynamic> _$ResultToJson(AccountDto instance) => <String, dynamic>{
+Map<String, dynamic> _$AccountDtoToJson(AccountDto instance) =>
+    <String, dynamic>{
       'username': instance.username,
       '_id': instance.id,
       'profile_photo': instance.profilePhoto,
