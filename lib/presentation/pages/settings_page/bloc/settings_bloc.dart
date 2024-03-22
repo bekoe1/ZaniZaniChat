@@ -16,7 +16,7 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
 
   eventHandler(SettingsEvent event, Emitter<SettingsState> emit) {
     if(event is SettingsLogOutEvent){
-      AuthRepository.LogOut();
+      AuthRepository.logOut();
     }
   }
 }

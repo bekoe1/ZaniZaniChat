@@ -1,4 +1,5 @@
 import 'package:bloc_test_app/data/repo/dialogs_repo.dart';
+import 'package:bloc_test_app/presentation/pages/test_page.dart';
 import 'package:bloc_test_app/utils/internal_storage_helper.dart';
 import 'package:flutter/material.dart';
 
@@ -78,9 +79,18 @@ class _DrawerWidgetState extends State<DrawerWidget> {
           ),
         ),
         GestureDetector(
-          onTap: (){
-              DialogsRepo.GetMyProfileInfo();
+          onTap: () {
+            // DialogsRepo.GetMyProfileInfo();
             // SharedPrefsHelper.GetAllData();
+            //WebSocketHelper().setProfile(id: 1);
+            //  WebSocketHelper().close();
+            //WebSocketHelper().connect();
+            //  WebSocketHelper().add();
+            // Navigator.push(
+            //   context,
+            //   // MaterialPageRoute(builder: (context) => TestPage()),
+            // );
+            //WebSocketHelper().SendMessage();
           },
           child: const ListTile(
             title: Text(

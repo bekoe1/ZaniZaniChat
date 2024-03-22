@@ -19,7 +19,7 @@ class SearchBloc extends Bloc<SearchEvent, SearchState> {
   eventHandler(SearchEvent event, Emitter<SearchState> emit) async{
     if(event is FetchProfiles) {
       try {
-        final response = await SearchRepo.SearchAccounts(event.name.toString());
+        final response = await SearchRepo.searchAccounts(event.name.toString());
         log(response!.results.toString());
         emit(SearchedAccountFoundState(accounts: response));
       }

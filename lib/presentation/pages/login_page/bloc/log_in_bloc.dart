@@ -34,7 +34,7 @@ class LogInBloc extends Bloc<LogInEvent, LogInState> {
       emit(state.copyWith(status: FormSubmitting()));
       try {
         response =
-            await AuthRepository.LogInData(state.username, state.password);
+            await AuthRepository.logInData(state.username, state.password);
         if (response != null) {
           SharedPrefsHelper.SetSessionToken(response);
           emit(state.copyWith(status: SubmissionSuccess()));

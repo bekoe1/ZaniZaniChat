@@ -17,7 +17,7 @@ class SettingsPage extends StatelessWidget {
           bckgroundColor: Colors.white,
           fontSize: 22,
           func: (){
-            AuthRepository.LogOut();
+            AuthRepository.logOut();
           },
           text: "LogOut",
           textColor: Colors.red,

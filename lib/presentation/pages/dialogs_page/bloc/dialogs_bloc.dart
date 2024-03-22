@@ -21,7 +21,7 @@ class DialogsBloc extends Bloc<DialogsEvent, DialogsState> {
   eventHandler(DialogsEvent event, Emitter<DialogsState> emit) async {
     if (event is FetchDialogsEvent) {
       try {
-        final response = await DialogsRepo.GetDialogs(event.page);
+        final response = await DialogsRepo.getDialogs(event.page);
         if (response != null) {
           emit(FetchedDialogsState(dialogs: response));
         } else if (response == null) {
@@ -37,7 +37,7 @@ class DialogsBloc extends Bloc<DialogsEvent, DialogsState> {
     }
     if (event is DeleteMessageEvent) {
       try {
-        final response = await DialogsRepo.DeleteDialog(event.chatId);
+        final response = await DialogsRepo.deleteDialog(event.chatId);
         emit(DeletingDone());
       } catch (e) {
         emit(ErrorInFetchingDialogsState(e.toString()));

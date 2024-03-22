@@ -13,7 +13,7 @@ class AuthRepository {
       requestBody: true,
     ));
 
-  static Future<void> LogOut() async {
+  static Future<void> logOut() async {
     const logoutUrl = "${ApiConstants.devEndpoint}auth/logout";
     final token = await SharedPrefsHelper.GetSessionToken();
     await dio.delete(logoutUrl,
@@ -26,7 +26,7 @@ class AuthRepository {
     //exit(0);
   }
 
-  static Future<void> ConnectToWebSocket() async {
+  static Future<void> connectToWebSocket() async {
     final wsUrl = Uri.parse(
         'ws${ApiConstants.devEndpoint.replaceAll("https", "")}websocket/messages?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6Ik9wZXIiLCJleHAiOjE3MDkwNTg2NDF9.r_pWEY33C15GEXuo2oIbcYYKTfTDMRG0D-5ra4iH7Fg');
     final channel = WebSocketChannel.connect(wsUrl);
@@ -42,7 +42,7 @@ class AuthRepository {
     }
   }
 
-  static Future<String?> LogInData(String username, String password) async {
+  static Future<String?> logInData(String username, String password) async {
     FormData data = FormData.fromMap({
       "username": username,
       "password": password,
@@ -63,7 +63,7 @@ class AuthRepository {
     return null;
   }
 
-  static Future<bool> SignInData(String name, String email, String pass) async {
+  static Future<bool> signInData(String name, String email, String pass) async {
     Map<String, dynamic> data = {
       "username": name,
       "password": pass,

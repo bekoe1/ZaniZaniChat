@@ -1,17 +1,17 @@
+import 'dart:async';
 import 'dart:developer';
 
 import 'package:bloc_test_app/data/dto/dialogs_dto.dart';
 import 'package:bloc_test_app/data/mapper/dialog_mapper.dart';
 import 'package:bloc_test_app/data/repo/auth_repo.dart';
 import 'package:bloc_test_app/domain/all_dialogs_model.dart';
-import 'package:bloc_test_app/domain/dialog_model.dart';
 import 'package:dio/dio.dart';
 
 import '../../utils/internal_storage_helper.dart';
 import '../../utils/network/constants.dart';
 
 class DialogsRepo {
-  static Future<PaginatedDialogsModel?> GetDialogs(int page) async {
+  static Future<PaginatedDialogsModel?> getDialogs(int page) async {
     final token = await SharedPrefsHelper.GetSessionToken();
     Map<String, dynamic> data = {
       "session": token,
@@ -30,7 +30,7 @@ class DialogsRepo {
         dialogs: dialogs.map((e) => (e.toModel())).toList());
   }
 
-  static Future<void> DeleteDialog(String chatId) async {
+  static Future<void> deleteDialog(String chatId) async {
     final token = await SharedPrefsHelper.GetSessionToken();
     Map<String, dynamic> data = {
       "chat_id": chatId,
@@ -39,7 +39,7 @@ class DialogsRepo {
         .post("${ApiConstants.devEndpoint}chats/delete");
   }
 
-  static void GetMyProfileInfo() async {
+  static void getMyProfileInfo() async {
     final token = await SharedPrefsHelper.GetSessionToken();
 
     final response =

@@ -33,7 +33,7 @@ class SignInBloc extends Bloc<SignInEvent, SignInState> {
       emit(state.copyWith(status: FormSubmitting()));
       final response;
       try{
-        response = await AuthRepository.SignInData(state.username, state.email, state.password);
+        response = await AuthRepository.signInData(state.username, state.email, state.password);
         if(response){
           emit(state.copyWith(status: SubmissionSuccess()));
         }

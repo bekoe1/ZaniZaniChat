@@ -9,19 +9,25 @@
     <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="62d1af30-4240-4ec3-a0cc-7b4bce47f66e" name="Changes" comment="user page demo">
-      <change afterPath="$PROJECT_DIR$/lib/data/dto/access_token_dto.dart" afterDir="false" />
+    <list default="true" id="62d1af30-4240-4ec3-a0cc-7b4bce47f66e" name="Changes" comment="repo fix">
+      <change afterPath="$PROJECT_DIR$/lib/data/dto/incoming_message_dto.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/data/dto/incoming_message_dto.g.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/data/mapper/message_mapper.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/data/repo/message_repo.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/data/repo/web_socket_repo.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/domain/message_model.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/presentation/pages/test_page.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/data/dto/search_accounts_dto.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/data/dto/search_accounts_dto.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/data/dto/search_accounts_dto.g.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/data/dto/search_accounts_dto.g.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/data/repo/auth_repo.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/data/repo/auth_repo.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/data/repo/dialogs_repo.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/data/repo/dialogs_repo.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/data/repo/search_repo.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/data/repo/search_repo.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/presentation/pages/dialogs_page/bloc/dialogs_bloc.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/presentation/pages/dialogs_page/bloc/dialogs_bloc.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/presentation/pages/dialogs_page/widgets/drawer.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/presentation/pages/dialogs_page/widgets/drawer.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/presentation/pages/login_page/bloc/log_in_bloc.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/presentation/pages/login_page/bloc/log_in_bloc.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/presentation/pages/login_page/login_page.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/presentation/pages/login_page/login_page.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/presentation/pages/search_page/bloc/search_bloc.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/presentation/pages/search_page/bloc/search_bloc.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/utils/internal_storage_helper.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/utils/internal_storage_helper.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/presentation/pages/settings_page/bloc/settings_bloc.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/presentation/pages/settings_page/bloc/settings_bloc.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/presentation/pages/settings_page/settings_page.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/presentation/pages/settings_page/settings_page.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/presentation/pages/sign_in_page/Bloc/sign_in_bloc.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/presentation/pages/sign_in_page/Bloc/sign_in_bloc.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/utils/network/constants.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/utils/network/constants.dart" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -181,7 +187,15 @@
       <option name="project" value="LOCAL" />
       <updated>1710699862076</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="repo fix">
+      <option name="closed" value="true" />
+      <created>1710943193692</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1710943193692</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -195,7 +209,8 @@
     <MESSAGE value="Account search logic" />
     <MESSAGE value="Account search logic fix + drawer icon error fix" />
     <MESSAGE value="user page demo" />
-    <option name="LAST_COMMIT_MESSAGE" value="user page demo" />
+    <MESSAGE value="repo fix" />
+    <option name="LAST_COMMIT_MESSAGE" value="repo fix" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
