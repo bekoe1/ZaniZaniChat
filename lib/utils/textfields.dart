@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
 class CustomTextFormField extends StatelessWidget {
+  final Color? hintText;
+
   CustomTextFormField({
     super.key,
     this.controller,
@@ -20,7 +22,13 @@ class CustomTextFormField extends StatelessWidget {
     this.maxLines,
     required this.inputType,
     this.onSaved,
-    this.textColor, this.height, this.cursorHeight, this.cursorColor, this.iconColor, this.inputAction,
+    this.textColor,
+    this.height,
+    this.cursorHeight,
+    this.cursorColor,
+    this.iconColor,
+    this.inputAction,
+    this.hintText,
   });
 
   final String? errorText;
@@ -63,18 +71,18 @@ class CustomTextFormField extends StatelessWidget {
       child: TextFormField(
         cursorHeight: cursorHeight,
         onSaved: onSaved,
-        textInputAction:inputAction?? TextInputAction.newline,
+        textInputAction: inputAction ?? TextInputAction.newline,
         minLines: 1,
         maxLines: maxLines ?? 1,
         onChanged: onChanged,
         style: TextStyle(
-          color: textColor??Colors.black,
+          color: textColor ?? Colors.black,
           fontWeight: FontWeight.w500,
           fontSize: 20,
         ),
         keyboardType: inputType,
         validator: validationFunc,
-        cursorColor: cursorColor??Colors.black,
+        cursorColor: cursorColor ?? Colors.black,
         decoration: InputDecoration(
           fillColor: fillColor,
           errorBorder: _typicalErrorBorder,
@@ -82,15 +90,18 @@ class CustomTextFormField extends StatelessWidget {
           errorStyle: const TextStyle(color: Colors.red, fontSize: 13),
           filled: filled ?? false,
           hintText: labelText,
-          hintStyle: const TextStyle(
+          hintStyle: TextStyle(
             fontWeight: FontWeight.w500,
-            color: Colors.grey,
-            fontSize: 20,
+            color: hintText,
+            fontSize: 14,
           ),
           enabledBorder: _typicalBorder,
           focusedBorder: _typicalBorder,
           contentPadding: const EdgeInsets.all(10),
-          prefixIcon: Icon(icon, color: iconColor,),
+          prefixIcon: Icon(
+            icon,
+            color: iconColor,
+          ),
           suffixIcon: IconButton(
             icon: Icon(suffixIcon),
             onPressed: action,

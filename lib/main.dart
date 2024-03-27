@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:bloc_test_app/presentation/pages/current_dialog_page/current_dialog_page.dart';
 import 'package:bloc_test_app/presentation/pages/dialogs_page/dialogs.page.dart';
 import 'package:bloc_test_app/presentation/pages/login_page/login_page.dart';
 import 'package:bloc_test_app/presentation/pages/my_account_page/my_account_page.dart';

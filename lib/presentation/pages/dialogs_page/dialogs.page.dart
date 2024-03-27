@@ -1,6 +1,8 @@
 import 'dart:developer';
 
+import 'package:bloc_test_app/data/repo/dialogs_repo.dart';
 import 'package:bloc_test_app/domain/dialog_model.dart';
+import 'package:bloc_test_app/presentation/pages/current_dialog_page/current_dialog_page.dart';
 import 'package:bloc_test_app/presentation/pages/dialogs_page/bloc/dialogs_bloc.dart';
 import 'package:bloc_test_app/presentation/pages/dialogs_page/widgets/drawer.dart';
 import 'package:bloc_test_app/presentation/pages/search_page/search_page.dart';
@@ -20,7 +22,7 @@ class DialogsPage extends StatefulWidget {
 
 class _DialogsPageState extends State<DialogsPage> {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey();
-
+  final List<DialogDataModel>dialogs = [];
   bool _isDrawerOpen = false;
 
   @override
@@ -38,7 +40,9 @@ class _DialogsPageState extends State<DialogsPage> {
                   Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => const SearchPage()));
+
+                       builder: (context) => const SearchPage()));
+                  // DialogsRepo.getNumberOfDialogPages();
                 },
                 icon: const Icon(
                   Icons.search,
@@ -68,10 +72,10 @@ class _DialogsPageState extends State<DialogsPage> {
             });
           }),
           body: ListView.builder(
-              itemCount: state.dialogs?.dialogs.length ?? 0,
+              itemCount: state.dialogs?.length ?? 0,
               itemBuilder: (context, index) {
                 if (state is FetchedDialogsState) {
-                  List<DialogModel>? dialogs = state.dialogs.dialogs;
+                  List<DialogDataModel> dialogs = state.dialogs;
                   return Column(
                     children: [
                       Slidable(
@@ -95,19 +99,19 @@ class _DialogsPageState extends State<DialogsPage> {
                               vertical: 10, horizontal: 10),
                           child: GestureDetector(
                             onTap: () {
-                              // Обработка нажатия на диалог
-                              (context).read<DialogsBloc>().add(
-                                  DeleteMessageEvent(
-                                      chatId:
-                                          state.dialogs.dialogs[index].chatId));
+
+                                Navigator.push(context, MaterialPageRoute(builder: (context)=>CurrentDialog(userId: state.dialogs[index].id)));
                             },
                             child: DisplayedDialogWidget(
-                              name: state.dialogs.dialogs[index].dialogsDtoWith
-                                  .username,
-                              message: state.dialogs.dialogs[index].message,
+                              name: state.dialogs[index].name.toString(),
+                              message: state.dialogs[index].lastMessage != null
+                                  ? state.dialogs[index].lastMessage!.v.data
+                                  : "chat created",
                               time:
-                                  "${state.dialogs.dialogs[index].time.hour.toString().padLeft(2, '0')}:${state.dialogs.dialogs[index].time.minute.toString().padLeft(2, '0')}",
-                              read: state.dialogs.dialogs[index].read,
+                                  "${state.dialogs[index].lastMessage?.v.time.hour.toString().padLeft(2, '0')}:${state.dialogs[index].lastMessage?.v.time.minute.toString().padLeft(2, '0')}",
+                              read: state.dialogs[index].lastMessage != null
+                                  ? state.dialogs[index].lastMessage!.v.read
+                                  : false,
                             ),
                           ),
                         ),

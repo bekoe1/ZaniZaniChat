@@ -14,7 +14,8 @@ IncomingMessageDto _$IncomingMessageDtoFromJson(Map<String, dynamic> json) =>
           json['time'] == null ? null : DateTime.parse(json['time'] as String),
       messageInfo: json['message_info'] == null
           ? null
-          : MessageInfoDto.fromJson(json['message_info'] as Map<String, dynamic>),
+          : MessageInfoDto.fromJson(
+              json['message_info'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$IncomingMessageDtoToJson(IncomingMessageDto instance) =>
@@ -25,7 +26,8 @@ Map<String, dynamic> _$IncomingMessageDtoToJson(IncomingMessageDto instance) =>
       'message_info': instance.messageInfo,
     };
 
-MessageInfoDto _$MessageInfoFromJson(Map<String, dynamic> json) => MessageInfoDto(
+MessageInfoDto _$MessageInfoDtoFromJson(Map<String, dynamic> json) =>
+    MessageInfoDto(
       fromWho: json['from_who'] as String?,
       chatId: json['chat_id'] as String?,
       typeOfMessage: json['type_of_message'] as String?,
@@ -33,7 +35,7 @@ MessageInfoDto _$MessageInfoFromJson(Map<String, dynamic> json) => MessageInfoDt
       messageId: json['message_id'] as String?,
     );
 
-Map<String, dynamic> _$MessageInfoToJson(MessageInfoDto instance) =>
+Map<String, dynamic> _$MessageInfoDtoToJson(MessageInfoDto instance) =>
     <String, dynamic>{
       'from_who': instance.fromWho,
       'chat_id': instance.chatId,

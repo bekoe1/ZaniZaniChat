@@ -10,7 +10,7 @@ import 'package:bloc_test_app/utils/network/constants.dart';
 import 'package:web_socket_channel/web_socket_channel.dart';
 
 class WebSocketRepo {
-  WebSocketChannel? channel;
+  static WebSocketChannel? channel;
 
   late StreamController<MessageModel> messageController;
 
@@ -19,6 +19,7 @@ class WebSocketRepo {
   }
 
   void connect() async {
+    initializeMessageControllers();
     final token = await SharedPrefsHelper.GetSessionToken();
     if (channel != null && channel!.closeCode != null) {
       log("соединение с веб сокетом уже открыто");
@@ -28,9 +29,10 @@ class WebSocketRepo {
           Uri.parse(WebSocketConstants.devEndpoint + token!));
       channel!.stream.listen(
         (event) {
-          final dto =
+           final dto =
               IncomingMessageDto.fromJson(jsonDecode(jsonDecode(event)));
-          messageController.add(dto.toModel());
+           messageController.add(dto.toModel());
+          log(event.toString());
         },
         onDone: () {
           log('Connection closed');
@@ -42,21 +44,20 @@ class WebSocketRepo {
     }
   }
 
-  void send(MessageModel model) {
+  void send(dynamic data) {
     if (channel == null && channel!.closeCode != null) {
       log("соединение отсутствует");
       return;
     } else {
-      channel!.sink.add(model);
+      channel!.sink.add(data);
     }
   }
 
   Stream<MessageModel> messageUpdate() {
     return messageController.stream;
   }
-
-  void disconnect() {
-    if (channel == null && channel!.closeCode != null) {
+  void disconnect() async {
+    if (channel == null) {
       log("соединение уже закрыто");
       return;
     } else {

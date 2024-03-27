@@ -1,4 +1,5 @@
 import 'package:bloc_test_app/data/repo/auth_repo.dart';
+import 'package:bloc_test_app/data/repo/web_socket_repo.dart';
 import 'package:bloc_test_app/utils/buttons.dart';
 import 'package:flutter/material.dart';
 
@@ -17,6 +18,7 @@ class SettingsPage extends StatelessWidget {
           bckgroundColor: Colors.white,
           fontSize: 22,
           func: (){
+            WebSocketRepo().disconnect();
             AuthRepository.logOut();
           },
           text: "LogOut",

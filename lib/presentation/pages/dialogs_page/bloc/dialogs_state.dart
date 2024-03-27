@@ -2,17 +2,22 @@ part of 'dialogs_bloc.dart';
 
 @immutable
 abstract class DialogsState {
-  final PaginatedDialogsModel? dialogs;
-
-  DialogsState({this.dialogs});
+  final List<DialogDataModel>? dialogs;
+  final String? chatId;
+  DialogsState({this.chatId,this.dialogs});
 }
 
 class DialogsInitial extends DialogsState {}
 
 class FetchedDialogsState extends DialogsState {
-  final PaginatedDialogsModel dialogs;
+  final List<DialogDataModel> dialogs;
 
   FetchedDialogsState({required this.dialogs}) : super(dialogs: dialogs);
+}
+class CanOpenChatState extends DialogsState{
+  final String chatId;
+
+  CanOpenChatState({required this.chatId}): super(chatId: chatId);
 }
 
 class ErrorInFetchingDialogsState extends DialogsState {

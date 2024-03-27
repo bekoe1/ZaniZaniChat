@@ -16,3 +16,9 @@ class DeleteMessageEvent extends DialogsEvent {
 }
 
 class NoDialogsEvent extends DialogsEvent {}
+
+class OpenedChatEvent extends DialogsEvent{
+  final String chatId;
+
+  OpenedChatEvent({required this.chatId});
+}

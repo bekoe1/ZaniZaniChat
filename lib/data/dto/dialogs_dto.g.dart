@@ -6,36 +6,64 @@ part of 'dialogs_dto.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-DialogDto _$DialogDtoFromJson(Map<String, dynamic> json) => DialogDto(
-      chatId: json['chat_id'] as String,
-      dialogsDtoWith: WithDto.fromJson(json['with'] as Map<String, dynamic>),
-      id: json['_id'] as String,
-      sender: json['sender'] as String,
+DialogsDto _$DialogsDtoFromJson(Map<String, dynamic> json) => DialogsDto(
       message: json['message'] as String,
+      data: (json['data'] as List<dynamic>)
+          .map((e) => Datum.fromJson(e as Map<String, dynamic>))
+          .toList(),
+    );
+
+Map<String, dynamic> _$DialogsDtoToJson(DialogsDto instance) =>
+    <String, dynamic>{
+      'message': instance.message,
+      'data': instance.data,
+    };
+
+Datum _$DatumFromJson(Map<String, dynamic> json) => Datum(
+      id: json['_id'] as String,
+      type: json['type_'] as String,
+      picture: json['picture'],
+      name: json['name'],
+      lastMessage: json['last_message'] == null
+          ? null
+          : LastMessage.fromJson(json['last_message'] as Map<String, dynamic>),
+    );
+
+Map<String, dynamic> _$DatumToJson(Datum instance) => <String, dynamic>{
+      '_id': instance.id,
+      'type_': instance.type,
+      'picture': instance.picture,
+      'name': instance.name,
+      'last_message': instance.lastMessage,
+    };
+
+LastMessage _$LastMessageFromJson(Map<String, dynamic> json) => LastMessage(
+      k: json['k'] as String,
+      v: MessageValueDto.fromJson(json['v'] as Map<String, dynamic>),
+    );
+
+Map<String, dynamic> _$LastMessageToJson(LastMessage instance) =>
+    <String, dynamic>{
+      'k': instance.k,
+      'v': instance.v,
+    };
+
+MessageValueDto _$MessageValueDtoFromJson(Map<String, dynamic> json) =>
+    MessageValueDto(
+      sender: json['sender'] as String,
+      data: json['data'] as String,
       time: DateTime.parse(json['time'] as String),
       type: json['type'] as String,
       read: json['read'] as bool,
-      profilePic: json['profile_pic'],
+      edited: json['edited'] as bool,
     );
 
-Map<String, dynamic> _$DialogDtoToJson(DialogDto instance) => <String, dynamic>{
-      'chat_id': instance.chatId,
-      'with': instance.dialogsDtoWith,
-      '_id': instance.id,
+Map<String, dynamic> _$MessageValueDtoToJson(MessageValueDto instance) =>
+    <String, dynamic>{
       'sender': instance.sender,
-      'message': instance.message,
+      'data': instance.data,
       'time': instance.time.toIso8601String(),
       'type': instance.type,
       'read': instance.read,
-      'profile_pic': instance.profilePic,
-    };
-
-WithDto _$WithDtoFromJson(Map<String, dynamic> json) => WithDto(
-      username: json['username'] as String,
-      id: json['id'] as String,
-    );
-
-Map<String, dynamic> _$WithDtoToJson(WithDto instance) => <String, dynamic>{
-      'username': instance.username,
-      'id': instance.id,
+      'edited': instance.edited,
     };

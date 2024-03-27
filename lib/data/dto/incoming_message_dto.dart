@@ -72,7 +72,7 @@ class MessageInfoDto {
         messageId: messageId ?? this.messageId,
       );
 
-  factory MessageInfoDto.fromJson(Map<String, dynamic> json) => _$MessageInfoFromJson(json);
+  factory MessageInfoDto.fromJson(Map<String, dynamic> json) => _$MessageInfoDtoFromJson(json);
 
-  Map<String, dynamic> toJson() => _$MessageInfoToJson(this);
+  Map<String, dynamic> toJson() => _$MessageInfoDtoToJson(this);
 }

@@ -14,14 +14,14 @@ class AuthRepository {
     ));
 
   static Future<void> logOut() async {
-    const logoutUrl = "${ApiConstants.devEndpoint}auth/logout";
-    final token = await SharedPrefsHelper.GetSessionToken();
-    await dio.delete(logoutUrl,
-        options: Options(headers: {
-          'Content-Type': 'application/json',
-          'Authorization': 'Bearer ${token.toString()}',
-          'accept': 'application/json',
-        }));
+  //   const logoutUrl = "${ApiConstants.devEndpoint}auth/logout";
+  //   final token = await SharedPrefsHelper.GetSessionToken();
+  //   await dio.delete(logoutUrl,
+  //       options: Options(headers: {
+  //         'Content-Type': 'application/json',
+  //         'Authorization': 'Bearer ${token.toString()}',
+  //         'accept': 'application/json',
+  //       }));
     SharedPrefsHelper.DeleteSession();
     //exit(0);
   }

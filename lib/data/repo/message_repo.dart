@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:convert';
 
 import 'package:bloc_test_app/data/repo/web_socket_repo.dart';
 import 'package:bloc_test_app/domain/message_model.dart';
@@ -7,10 +8,13 @@ class MessageRepo {
   final WebSocketRepo wsRepo = WebSocketRepo();
   StreamSubscription? messageSubscription;
 
-  void sendTextMessage(MessageModel model) async {
-    if (model.messageInfo?.messageData != null) {
-      wsRepo.send(model);
-    }
+  void sendTextMessage(String text, String chatId) async {
+    Map<String, dynamic> data = {
+      "type_": "text",
+      "chat_id": chatId,
+      "data": text
+    };
+      wsRepo.send(json.encode(data));
   }
 
   void subscribeToMessageUpdates(

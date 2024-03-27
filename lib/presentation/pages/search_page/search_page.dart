@@ -7,6 +7,8 @@ import 'package:bloc_test_app/utils/textfields.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../current_dialog_page/bloc/current_chat_bloc.dart';
+
 class SearchPage extends StatefulWidget {
   const SearchPage({super.key});
 
@@ -30,16 +32,14 @@ class _SearchPageState extends State<SearchPage> {
                   onChanged: (text) {
                     if (text != "") {
                       context.read<SearchBloc>().add(FetchProfiles(name: text));
-                    }
-                    else{
+                    } else {
                       context.read<SearchBloc>().add(TryToFetchEmptyText());
                     }
                   },
                   onSaved: (text) {
                     if (text != "") {
                       context.read<SearchBloc>().add(FetchProfiles(name: text));
-                    }
-                    else{
+                    } else {
                       context.read<SearchBloc>().add(TryToFetchEmptyText());
                     }
                   },
@@ -47,7 +47,8 @@ class _SearchPageState extends State<SearchPage> {
                   obscuringPass: false,
                   height: 50,
                   width: 300,
-                  labelText: "поиск",
+                  labelText: "Введите имя пользователя",
+                  hintText: Colors.grey,
                   cursorHeight: 30,
                   cursorColor: Colors.white,
                   inputType: TextInputType.text,
@@ -83,17 +84,13 @@ class _SearchPageState extends State<SearchPage> {
                               left: 15, top: 5, bottom: 5),
                           child: GestureDetector(
                             onTap: () {
-                              //context.read<SearchBloc>().add(TryingToStartDialog(accountId));
-                              //далее происходит попытка достать чат id, если его нет,то
-                              //мы создаем новый чат id
-                              //из state берем чат id
-                              //Navigator.push(context, MaterialPageRoute(builder: (context)=> CurrentDialog(chatId: state.chatId)));
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
                                   builder: (context) => CurrentDialog(
-                                      name: state
-                                          .accounts!.results[index].username),
+                                    userId:
+                                        state.accounts!.results[index].username,
+                                  ),
                                 ),
                               );
                             },

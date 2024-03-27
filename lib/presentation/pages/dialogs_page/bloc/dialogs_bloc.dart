@@ -1,9 +1,6 @@
-import 'dart:async';
-import 'dart:developer';
-
 import 'package:bloc/bloc.dart';
 import 'package:bloc_test_app/data/repo/dialogs_repo.dart';
-import 'package:bloc_test_app/domain/all_dialogs_model.dart';
+import 'package:bloc_test_app/domain/dialog_model.dart';
 import 'package:flutter/material.dart';
 import 'package:meta/meta.dart';
 
@@ -19,11 +16,30 @@ class DialogsBloc extends Bloc<DialogsEvent, DialogsState> {
   }
 
   eventHandler(DialogsEvent event, Emitter<DialogsState> emit) async {
+    if(event is OpenedChatEvent){
+      //todo id check logic
+      emit(CanOpenChatState(chatId: event.chatId));
+    }
     if (event is FetchDialogsEvent) {
       try {
+        //todo number of pages check
         final response = await DialogsRepo.getDialogs(event.page);
         if (response != null) {
-          emit(FetchedDialogsState(dialogs: response));
+          emit(FetchedDialogsState(
+            dialogs: response.data.reversed.toList()
+              ..toList().sort(
+                (a, b) {
+                  if (a.lastMessage != null && b.lastMessage != null) {
+                    return a.lastMessage!.v.time
+                        .compareTo(b.lastMessage!.v.time);
+                  } else if (a.lastMessage == null && b.lastMessage == null) {
+                    return a.name.compareTo(b.name);
+                  } else {
+                    return a.lastMessage == null ? -1 : 1;
+                  }
+                },
+              ),
+          ));
         } else if (response == null) {
           emit(NoDialogsState());
         }
