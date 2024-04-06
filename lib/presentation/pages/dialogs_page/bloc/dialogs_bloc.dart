@@ -1,6 +1,8 @@
+import 'dart:developer';
+
 import 'package:bloc/bloc.dart';
-import 'package:bloc_test_app/data/repo/dialogs_repo.dart';
-import 'package:bloc_test_app/domain/dialog_model.dart';
+import 'package:bloc_test_app/data/datasources/dialogs_data_source.dart';
+import 'package:bloc_test_app/domain/models/dialogs.dart';
 import 'package:flutter/material.dart';
 import 'package:meta/meta.dart';
 
@@ -15,49 +17,55 @@ class DialogsBloc extends Bloc<DialogsEvent, DialogsState> {
     });
   }
 
+  final DialogsDataSource dataSource = DialogsDataSource();
+
   eventHandler(DialogsEvent event, Emitter<DialogsState> emit) async {
-    if(event is OpenedChatEvent){
+    if (event is OpenedChatEvent) {
       //todo id check logic
       emit(CanOpenChatState(chatId: event.chatId));
     }
     if (event is FetchDialogsEvent) {
       try {
         //todo number of pages check
-        final response = await DialogsRepo.getDialogs(event.page);
-        if (response != null) {
-          emit(FetchedDialogsState(
-            dialogs: response.data.reversed.toList()
-              ..toList().sort(
-                (a, b) {
-                  if (a.lastMessage != null && b.lastMessage != null) {
-                    return a.lastMessage!.v.time
-                        .compareTo(b.lastMessage!.v.time);
-                  } else if (a.lastMessage == null && b.lastMessage == null) {
-                    return a.name.compareTo(b.name);
-                  } else {
-                    return a.lastMessage == null ? -1 : 1;
-                  }
-                },
-              ),
-          ));
-        } else if (response == null) {
+        final response = await dataSource.getDialogs(event.page);
+        if (response != null && response.data.isNotEmpty) {
+          emit(
+            FetchedDialogsState(dialogs: sortDialogs(response.data)),
+          );
+        } else if (response != null && response.data.isEmpty) {
           emit(NoDialogsState());
+        } else {
+          emit(ErrorInFetchingDialogsState("Ошибка загрузки"));
         }
       } catch (e) {
-        if (e.toString() == "No such chatc error") {
+        if (e.toString() == "Ошибка загрузки") {
           emit(NoDialogsState());
         } else {
           emit(ErrorInFetchingDialogsState(e.toString()));
         }
       }
     }
-    if (event is DeleteMessageEvent) {
+    if (event is DeleteDialogEvent) {
       try {
-        final response = await DialogsRepo.deleteDialog(event.chatId);
+        final response =
+            await dataSource.deleteDialog(event.chatId, event.deleteForBoth);
         emit(DeletingDone());
       } catch (e) {
         emit(ErrorInFetchingDialogsState(e.toString()));
       }
     }
+  }
+
+  List<DialogsData> sortDialogs(List<DialogsData> dialogs) {
+    return dialogs.reversed.toList()
+      ..sort(
+        (a, b) {
+          if (a.lastMessage.data != "" && b.lastMessage.data != "") {
+            return a.lastMessage.time.compareTo(b.lastMessage.time);
+          } else {
+            return a.lastMessage.data == "" ? -1 : 1;
+          }
+        },
+      );
   }
 }

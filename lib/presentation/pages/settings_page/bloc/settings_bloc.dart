@@ -1,8 +1,5 @@
-import 'dart:async';
 
 import 'package:bloc/bloc.dart';
-import 'package:bloc_test_app/data/repo/auth_repo.dart';
-import 'package:bloc_test_app/data/repo/web_socket_repo.dart';
 import 'package:meta/meta.dart';
 
 part 'settings_event.dart';
@@ -16,9 +13,9 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
   }
 
   eventHandler(SettingsEvent event, Emitter<SettingsState> emit) {
-    if(event is SettingsLogOutEvent){
-      WebSocketRepo.channel?.sink.close();
-      AuthRepository.logOut();
-    }
+    // if(event is SettingsLogOutEvent){
+    //   WebSocketRepo.channel?.sink.close();
+    //   AuthRepository.logOut();
+    // }
   }
 }

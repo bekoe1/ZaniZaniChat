@@ -2,7 +2,7 @@ part of 'dialogs_bloc.dart';
 
 @immutable
 abstract class DialogsState {
-  final List<DialogDataModel>? dialogs;
+  final List<DialogsData>? dialogs;
   final String? chatId;
   DialogsState({this.chatId,this.dialogs});
 }
@@ -10,7 +10,7 @@ abstract class DialogsState {
 class DialogsInitial extends DialogsState {}
 
 class FetchedDialogsState extends DialogsState {
-  final List<DialogDataModel> dialogs;
+  final List<DialogsData> dialogs;
 
   FetchedDialogsState({required this.dialogs}) : super(dialogs: dialogs);
 }

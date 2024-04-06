@@ -2,9 +2,7 @@
 import 'dart:developer';
 
 import 'package:bloc/bloc.dart';
-import 'package:bloc_test_app/data/dto/access_token_dto.dart';
-import 'package:bloc_test_app/data/repo/auth_repo.dart';
-import 'package:bloc_test_app/data/repo/web_socket_repo.dart';
+import 'package:bloc_test_app/data/datasources/auth_data_source.dart';
 import 'package:bloc_test_app/utils/internal_storage_helper.dart';
 import 'package:meta/meta.dart';
 import '../../../../utils/form_submission_status.dart';
@@ -14,9 +12,9 @@ part 'log_in_event.dart';
 part 'log_in_state.dart';
 
 class LogInBloc extends Bloc<LogInEvent, LogInState> {
-  final AuthRepository? repo;
+  final AuthDataSource dataSource;
 
-  LogInBloc({this.repo}) : super(const LogInState()) {
+  LogInBloc({required this.dataSource}) : super(const LogInState()) {
     on<LogInEvent>((event, emit) async {
       await eventHandler(event, emit);
     });
@@ -35,10 +33,11 @@ class LogInBloc extends Bloc<LogInEvent, LogInState> {
       emit(state.copyWith(status: FormSubmitting()));
       try {
         response =
-            await AuthRepository.logInData(state.username, state.password);
+            await dataSource.logIn(username: state.username,password: state.password);
         if (response != null) {
           SharedPrefsHelper.SetSessionToken(response);
-          WebSocketRepo().connect();
+          // WebSocketRepo().connect();
+          //todo ws connect
           emit(state.copyWith(status: SubmissionSuccess()));
         } else {
           emit(state.copyWith(status: SubmissionFailed(exc: "Сервер не вернул токен")));

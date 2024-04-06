@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 
 class CustomTextFormField extends StatelessWidget {
-  final Color? hintText;
+  final Color? hintColor;
 
   CustomTextFormField({
+    this.hintTextStyle,
     super.key,
     this.controller,
     this.visibleText,
@@ -12,7 +13,7 @@ class CustomTextFormField extends StatelessWidget {
     this.action,
     this.onChanged,
     required this.obscuringPass,
-    this.labelText,
+    this.hintText,
     this.errorText,
     this.validationFunc,
     required this.width,
@@ -20,6 +21,8 @@ class CustomTextFormField extends StatelessWidget {
     this.filled,
     this.hoverColor,
     this.maxLines,
+    this.labelStyle,
+    this.labelText,
     required this.inputType,
     this.onSaved,
     this.textColor,
@@ -28,20 +31,23 @@ class CustomTextFormField extends StatelessWidget {
     this.cursorColor,
     this.iconColor,
     this.inputAction,
-    this.hintText,
+    this.hintColor,
   });
 
   final String? errorText;
-  final String? labelText;
+  final String? hintText;
   final String? visibleText;
   final TextEditingController? controller;
   final IconData? icon;
   final IconData? suffixIcon;
   final void Function()? action;
+  final TextStyle? hintTextStyle;
   final void Function(String)? onChanged;
   final void Function(String?)? onSaved;
   final Color? fillColor;
   final bool obscuringPass;
+  final TextStyle? labelStyle;
+  final String? labelText;
   final bool? filled;
   final int? maxLines;
   final Color? textColor;
@@ -84,17 +90,15 @@ class CustomTextFormField extends StatelessWidget {
         validator: validationFunc,
         cursorColor: cursorColor ?? Colors.black,
         decoration: InputDecoration(
+          labelText: labelText,
+          labelStyle: labelStyle,
           fillColor: fillColor,
           errorBorder: _typicalErrorBorder,
           focusedErrorBorder: _typicalErrorBorder,
           errorStyle: const TextStyle(color: Colors.red, fontSize: 13),
           filled: filled ?? false,
-          hintText: labelText,
-          hintStyle: TextStyle(
-            fontWeight: FontWeight.w500,
-            color: hintText,
-            fontSize: 14,
-          ),
+          hintText: hintText,
+          hintStyle: hintTextStyle,
           enabledBorder: _typicalBorder,
           focusedBorder: _typicalBorder,
           contentPadding: const EdgeInsets.all(10),
