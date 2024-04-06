@@ -1,5 +1,3 @@
-import 'package:bloc_test_app/data/repo/dialogs_repo.dart';
-import 'package:bloc_test_app/presentation/pages/test_page.dart';
 import 'package:bloc_test_app/utils/internal_storage_helper.dart';
 import 'package:flutter/material.dart';
 
@@ -18,7 +16,7 @@ class DrawerWidget extends StatefulWidget {
 }
 
 class _DrawerWidgetState extends State<DrawerWidget> {
-  late String name;
+  String name = "";
 
   @override
   void initState() {
@@ -56,17 +54,8 @@ class _DrawerWidgetState extends State<DrawerWidget> {
               backgroundColor: Colors.white54,
               maxRadius: 50,
             ),
-            decoration: const BoxDecoration(
-              gradient: LinearGradient(
-                colors: [
-                  Colors.black,
-                  Colors.black12,
-                  Colors.white10,
-                  Colors.white12,
-                  Colors.white54,
-                  Colors.white70,
-                ],
-              ),
+            decoration:  const BoxDecoration(
+              color: Color.fromRGBO(46, 45, 49, 1)
             ),
             accountName: Text(
               name,

@@ -1,8 +1,6 @@
 import 'dart:developer';
 
-import 'package:bloc_test_app/data/repo/dialogs_repo.dart';
-import 'package:bloc_test_app/domain/dialog_model.dart';
-import 'package:bloc_test_app/presentation/pages/current_dialog_page/current_dialog_page.dart';
+import 'package:bloc_test_app/domain/models/dialogs.dart';
 import 'package:bloc_test_app/presentation/pages/dialogs_page/bloc/dialogs_bloc.dart';
 import 'package:bloc_test_app/presentation/pages/dialogs_page/widgets/drawer.dart';
 import 'package:bloc_test_app/presentation/pages/search_page/search_page.dart';
@@ -22,7 +20,6 @@ class DialogsPage extends StatefulWidget {
 
 class _DialogsPageState extends State<DialogsPage> {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey();
-  final List<DialogDataModel>dialogs = [];
   bool _isDrawerOpen = false;
 
   @override
@@ -37,12 +34,13 @@ class _DialogsPageState extends State<DialogsPage> {
             actions: [
               IconButton(
                 onPressed: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-
-                       builder: (context) => const SearchPage()));
+                  // Navigator.push(
+                  //     context,
+                  //     MaterialPageRoute(
+                  //
+                  //      builder: (context) => const SearchPage()));
                   // DialogsRepo.getNumberOfDialogPages();
+                  log("перешел в чат");
                 },
                 icon: const Icon(
                   Icons.search,
@@ -75,7 +73,7 @@ class _DialogsPageState extends State<DialogsPage> {
               itemCount: state.dialogs?.length ?? 0,
               itemBuilder: (context, index) {
                 if (state is FetchedDialogsState) {
-                  List<DialogDataModel> dialogs = state.dialogs;
+                  List<DialogsData> dialogs = state.dialogs;
                   return Column(
                     children: [
                       Slidable(
@@ -99,20 +97,17 @@ class _DialogsPageState extends State<DialogsPage> {
                               vertical: 10, horizontal: 10),
                           child: GestureDetector(
                             onTap: () {
-
-                                Navigator.push(context, MaterialPageRoute(builder: (context)=>CurrentDialog(userId: state.dialogs[index].id)));
+                              // Navigator.push(context, MaterialPageRoute(builder: (context)=>CurrentDialog(userId: state.dialogs[index].id)));
                             },
                             child: DisplayedDialogWidget(
-                              name: state.dialogs[index].name.toString(),
-                              message: state.dialogs[index].lastMessage != null
-                                  ? state.dialogs[index].lastMessage!.v.data
-                                  : "chat created",
-                              time:
-                                  "${state.dialogs[index].lastMessage?.v.time.hour.toString().padLeft(2, '0')}:${state.dialogs[index].lastMessage?.v.time.minute.toString().padLeft(2, '0')}",
-                              read: state.dialogs[index].lastMessage != null
-                                  ? state.dialogs[index].lastMessage!.v.read
-                                  : false,
-                            ),
+                                name: state.dialogs[index].name.toString(),
+                                message:
+                                    state.dialogs[index].lastMessage.data != ""
+                                        ? state.dialogs[index].lastMessage.data
+                                        : "chat created",
+                                time:
+                                    "${state.dialogs[index].lastMessage.time.hour.toString().padLeft(2, '0')}:${state.dialogs[index].lastMessage.time.minute.toString().padLeft(2, '0')}",
+                                read: state.dialogs[index].lastMessage.read),
                           ),
                         ),
                       ),
@@ -122,7 +117,10 @@ class _DialogsPageState extends State<DialogsPage> {
                   return const Center(child: CircularProgressIndicator());
                 } else if (state is NoDialogsState) {
                   return const Center(
-                    child: Text("Для поиска собеседника нажмите 'Поиск'"),
+                    child: Text(
+                      "Для поиска собеседника нажмите 'Поиск'",
+                      style: TextStyle(color: Colors.white),
+                    ),
                   );
                 } else {
                   return const Center(

@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:bloc_test_app/data/datasources/auth_data_source.dart';
 import 'package:bloc_test_app/presentation/pages/sign_in_page/Bloc/sign_in_bloc.dart';
 import 'package:bloc_test_app/utils/form_submission_status.dart';
 import 'package:bloc_test_app/utils/snack_bar.dart';
@@ -32,7 +33,7 @@ class _SignInPageState extends State<SignInPage> {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => SignInBloc(),
+      create: (context) => SignInBloc(authDataSource: AuthDataSource()),
       child: BlocBuilder<SignInBloc, SignInState>(
         builder: (context, state) => Scaffold(
           backgroundColor: Colors.white10,
@@ -78,7 +79,7 @@ class _SignInPageState extends State<SignInPage> {
                           }
                           return null;
                         },
-                        labelText: "Введите имя пользователя",
+                        hintText: "Введите имя пользователя",
                         controller: usernameController,
                         icon: Icons.person,
                         obscuringPass: false,
@@ -102,7 +103,7 @@ class _SignInPageState extends State<SignInPage> {
                           }
                           return null;
                         },
-                        labelText: "Введите пароль",
+                        hintText: "Введите пароль",
                         controller: passwordController,
                         icon: Icons.https,
                         obscuringPass: obscuringPassword,
@@ -137,7 +138,7 @@ class _SignInPageState extends State<SignInPage> {
                           return null;
                         },
                         width: 350,
-                        labelText: "Введите email",
+                        hintText: "Введите email",
                         icon: Icons.email,
                         obscuringPass: false,
                         controller: emailController,

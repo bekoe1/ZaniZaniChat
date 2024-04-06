@@ -1,6 +1,5 @@
 import 'dart:developer';
 
-import 'package:bloc_test_app/presentation/pages/current_dialog_page/current_dialog_page.dart';
 import 'package:bloc_test_app/presentation/pages/dialogs_page/dialogs.page.dart';
 import 'package:bloc_test_app/presentation/pages/login_page/login_page.dart';
 import 'package:bloc_test_app/presentation/pages/my_account_page/my_account_page.dart';
@@ -36,7 +35,7 @@ class MyApp extends StatelessWidget {
           '/dialogs' : (context) =>  const DialogsPage(),
           '/accountInfo' : (context) => const MyAccountPage(),
         },
-        home: token == null ? const LogInPage() : DialogsPage());
-       //home: DialogsPage());
+        home: token == null ? const LogInPage() : const DialogsPage());
+       // home: LogInPage());
   }
 }
