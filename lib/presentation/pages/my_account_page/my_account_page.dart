@@ -1,9 +1,14 @@
+import 'package:bloc_test_app/presentation/pages/dialogs_page/dialogs.page.dart';
 import 'package:bloc_test_app/presentation/pages/my_account_page/bloc/my_account_bloc.dart';
 import 'package:bloc_test_app/presentation/pages/my_account_page/subpages/fio_change_page.dart';
+import 'package:bloc_test_app/presentation/pages/my_account_page/subpages/username_change_page.dart';
+import 'package:bloc_test_app/utils/buttons.dart';
 import 'package:bloc_test_app/utils/network/constants.dart';
 import 'package:bloc_test_app/utils/textfields.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
+import '../../../data/datasources/auth_data_source.dart';
 
 class MyAccountPage extends StatefulWidget {
   const MyAccountPage({super.key});
@@ -22,83 +27,99 @@ class _MyAccountPageState extends State<MyAccountPage> {
       child: Scaffold(
         backgroundColor: Colors.white12,
         body: BlocBuilder<MyAccountBloc, MyAccountState>(
-  builder: (context, state) {
-    return CustomScrollView(
-          slivers: [
-            if (state is MyAccDataFetched)
-            ProfilePicWidget(images: state.data!.profilePhotos),
-            SliverList(
-              delegate: SliverChildBuilderDelegate(
+          builder: (context, state) {
+            return CustomScrollView(
+              slivers: [
+                if (state is MyAccDataFetched)
+                  ProfilePicWidget(images: state.data!.profilePhotos),
+                SliverList(
+                  delegate: SliverChildBuilderDelegate(
                     (context, index) {
-                  return BlocBuilder<MyAccountBloc, MyAccountState>(
-                    builder: (context, state) {
-                      if (state is MyAccDataFetched) {
-                        return Padding(
-                          padding: const EdgeInsets.only(top: 30),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.stretch,
-                            children: [
-                              GestureDetector(
-                                onTap: () {
-                                  Navigator.push(context, MaterialPageRoute(builder: (context)=> FioChangePage()));
-                                },
-                                child: Text(
-                                  state.data!.name.isEmpty &&
-                                      state.data!.surname.isEmpty
-                                      ? "Нажмите здесь, чтобы ввести имя и фамилию"
-                                      : "${state.data!.name} ${state.data!.surname}",
-                                  style: state.data!.name.isEmpty &&
-                                      state.data!.surname.isEmpty
-                                      ? const TextStyle(
-                                    color: Colors.white54,
-                                    fontSize: 17,
-                                    fontWeight: FontWeight.w300,
-                                  )
-                                      : const TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 20,
-                                    fontWeight: FontWeight.w400,
+                      return BlocBuilder<MyAccountBloc, MyAccountState>(
+                        builder: (context, state) {
+                          if (state is MyAccDataFetched) {
+                            return Padding(
+                              padding: const EdgeInsets.only(top: 30),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+                                  GestureDetector(
+                                    onTap: () {
+                                      Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) =>
+                                                  FioChangePage()));
+                                    },
+                                    child: Text(
+                                      state.data!.name.isEmpty &&
+                                              state.data!.surname.isEmpty
+                                          ? "Нажмите здесь, чтобы ввести имя и фамилию"
+                                          : "${state.data!.name} ${state.data!.surname}",
+                                      style: state.data!.name.isEmpty &&
+                                              state.data!.surname.isEmpty
+                                          ? const TextStyle(
+                                              color: Colors.white54,
+                                              fontSize: 20,
+                                              fontWeight: FontWeight.w300,
+                                            )
+                                          : const TextStyle(
+                                              color: Colors.white,
+                                              fontSize: 24,
+                                              fontWeight: FontWeight.w500,
+                                            ),
+                                      textAlign: TextAlign.center,
+                                    ),
                                   ),
-                                  textAlign: TextAlign.center,
-                                ),
+                                  const SizedBox(
+                                    height: 10,
+                                  ),
+                                  GestureDetector(
+                                    child: AccountInfoRowElement(
+                                      info: "Username",
+                                      data: state.data!.username,
+                                    ),
+                                    onTap: () {
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) =>
+                                                UsernameChangePage()),
+                                      );
+                                    },
+                                  ),
+                                  AccountInfoRowElement(
+                                    info: "Email",
+                                    data: state.data!.email.adress.toString(),
+                                  ),
+                                  const SizedBox(height: 30),
+                                  CustomElevatedButton(
+                                    bckgroundColor: Colors.grey,
+                                    fontSize: 22,
+                                    func: () {
+                                      // WebSocketRepo().disconnect();
+                                      AuthDataSource().logOut();
+                                    },
+                                    text: "LogOut",
+                                    textColor: Colors.black,
+                                  ),
+                                ],
                               ),
-                              const SizedBox(
-                                height: 10,
-                              ),
-                              AccountInfoRowElement(
-                                info: "Username",
-                                data: state.data!.username,
-                              ),
-                              AccountInfoRowElement(
-                                info: "Email",
-                                data: state.data!.email.adress.toString(),
-                              ),
-                            ],
-                          ),
-                        );
-                      } else if (state is ErrorInFetchingMyAccData) {
-                        return const Center(
-                          child: Text(
-                            "Возникла ошибка :(",
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 22,
-                            ),
-                          ),
-                        );
-                      } else {
-                        return const Center(child: CircularProgressIndicator());
-                      }
+                            );
+                          } else {
+                            return const Center(
+                                child: CircularProgressIndicator());
+                          }
+                        },
+                      );
                     },
-                  );
-                },
-                childCount: 1,
-              ),
-            ),
-          ],
-        );
-  },
-),
+                    childCount: 1,
+                  ),
+                ),
+              ],
+            );
+          },
+        ),
       ),
     );
   }
@@ -148,6 +169,7 @@ class AccountInfoRowElement extends StatelessWidget {
                   fontWeight: FontWeight.w300,
                 ),
               ),
+
             ],
           ),
         ],
@@ -158,9 +180,11 @@ class AccountInfoRowElement extends StatelessWidget {
 
 class ProfilePicWidget extends StatefulWidget {
   ProfilePicWidget({
-    Key? key, required this.images,
+    Key? key,
+    required this.images,
   }) : super(key: key);
   final List<String> images;
+
   @override
   State<ProfilePicWidget> createState() => _ProfilePicWidgetState();
 }
@@ -182,6 +206,18 @@ class _ProfilePicWidgetState extends State<ProfilePicWidget> {
   @override
   Widget build(BuildContext context) {
     return SliverAppBar(
+      leading: IconButton(
+        icon: const Icon(
+          Icons.arrow_back,
+          color: Colors.white,
+        ),
+        onPressed: () {
+          Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(builder: (context) => const DialogsPage()),
+          );
+        },
+      ),
       expandedHeight: 300,
       backgroundColor: Colors.white12,
       iconTheme: const IconThemeData(color: Colors.white),
@@ -202,9 +238,8 @@ class _ProfilePicWidgetState extends State<ProfilePicWidget> {
                     });
                   },
                   controller: pageController,
-                  itemCount: widget.images.isNotEmpty
-                      ? widget.images.length
-                      : 1,
+                  itemCount:
+                      widget.images.isNotEmpty ? widget.images.length : 1,
                   itemBuilder: (context, index) {
                     currentIndex = index;
                     if (widget.images.isNotEmpty) {
@@ -224,7 +259,7 @@ class _ProfilePicWidgetState extends State<ProfilePicWidget> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: List.generate(
                   widget.images.length,
-                      (index) {
+                  (index) {
                     return Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: Container(

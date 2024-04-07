@@ -34,13 +34,11 @@ class _DialogsPageState extends State<DialogsPage> {
             actions: [
               IconButton(
                 onPressed: () {
-                  // Navigator.push(
-                  //     context,
-                  //     MaterialPageRoute(
-                  //
-                  //      builder: (context) => const SearchPage()));
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => const SearchPage()),
+                  );
                   // DialogsRepo.getNumberOfDialogPages();
-                  log("перешел в чат");
                 },
                 icon: const Icon(
                   Icons.search,

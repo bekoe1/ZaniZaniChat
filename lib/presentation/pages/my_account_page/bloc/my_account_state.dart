@@ -4,7 +4,7 @@ part of 'my_account_bloc.dart';
 abstract class MyAccountState {
   final MyAccountInfoData? data;
 
-  MyAccountState({required this.data});
+  MyAccountState({this.data});
 }
 
 class MyAccountInitial extends MyAccountState {
@@ -20,5 +20,5 @@ class MyAccDataFetched extends MyAccountState {
 class ErrorInFetchingMyAccData extends MyAccountState {
   final String exc;
 
-  ErrorInFetchingMyAccData({required super.data, required this.exc});
+  ErrorInFetchingMyAccData({required this.exc, super.data});
 }

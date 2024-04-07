@@ -42,5 +42,25 @@ class MyAccountBloc extends Bloc<MyAccountEvent, MyAccountState> {
         ));
       }
     }
+    if(event is AttemptToChangeNameAndSurname){
+      try{
+          final response =await dataSource.changeNameAndSurname(event.name, event.surname);
+          if(response != "ok"){
+            emit(ErrorInFetchingMyAccData(exc: response.toString()));
+          }
+      }catch(e){
+        log(e.toString());
+      }
+    }
+    if(event is AttemptToChangeUserName){
+      try{
+        final response =await dataSource.changeUsername(event.username);
+        if(response != "ok"){
+          emit(ErrorInFetchingMyAccData(exc: response.toString()));
+        }
+      }catch(e){
+        log(e.toString());
+      }
+    }
   }
 }

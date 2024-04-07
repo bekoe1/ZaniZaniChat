@@ -2,7 +2,7 @@ part of 'search_bloc.dart';
 
 @immutable
 abstract class SearchState {
-  final PaginatedDataTable? accounts;
+  final List<SearchedAccount>? accounts;
 
   SearchState({this.accounts});
 }

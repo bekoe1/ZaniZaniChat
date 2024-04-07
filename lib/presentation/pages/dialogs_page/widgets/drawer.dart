@@ -1,4 +1,5 @@
 import 'package:bloc_test_app/utils/internal_storage_helper.dart';
+import 'package:bloc_test_app/utils/network/constants.dart';
 import 'package:flutter/material.dart';
 
 import '../../settings_page/settings_page.dart';
@@ -50,13 +51,13 @@ class _DrawerWidgetState extends State<DrawerWidget> {
             Navigator.pushNamed(context, '/accountInfo');
           },
           child: UserAccountsDrawerHeader(
-            currentAccountPicture: const CircleAvatar(
-              backgroundColor: Colors.white54,
+            currentAccountPicture: CircleAvatar(
+              backgroundColor: Colors.black,
               maxRadius: 50,
+              child: OtherConstants().accountCircle,
             ),
-            decoration:  const BoxDecoration(
-              color: Color.fromRGBO(46, 45, 49, 1)
-            ),
+            decoration:
+                const BoxDecoration(color: Color.fromRGBO(46, 45, 49, 1)),
             accountName: Text(
               name,
               style: const TextStyle(

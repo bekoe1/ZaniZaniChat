@@ -5,20 +5,17 @@ abstract class MyAccountEvent {}
 
 class FetchAccountInfoEvent extends MyAccountEvent {}
 
-class AttemptToChangeName extends MyAccountEvent{
-  final String data;
+class AttemptToChangeNameAndSurname extends MyAccountEvent{
+  final String name;
+  final String surname;
 
-  AttemptToChangeName({required this.data});
-}
+  AttemptToChangeNameAndSurname({required this.name, required this.surname});
 
-class AttemptToChangeSurName extends MyAccountEvent{
-  final String data;
-
-  AttemptToChangeSurName({required this.data});
 }
 
 class AttemptToChangeUserName extends MyAccountEvent{
-  final String data;
+  final String username;
 
-  AttemptToChangeUserName({required this.data});
+  AttemptToChangeUserName({required this.username});
 }
+
