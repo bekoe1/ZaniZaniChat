@@ -1,6 +1,7 @@
 import 'dart:developer';
 
 import 'package:bloc_test_app/domain/models/dialogs.dart';
+import 'package:bloc_test_app/presentation/pages/current_dialog_page/current_dialog_page.dart';
 import 'package:bloc_test_app/presentation/pages/dialogs_page/bloc/dialogs_bloc.dart';
 import 'package:bloc_test_app/presentation/pages/dialogs_page/widgets/drawer.dart';
 import 'package:bloc_test_app/presentation/pages/search_page/search_page.dart';
@@ -95,7 +96,8 @@ class _DialogsPageState extends State<DialogsPage> {
                               vertical: 10, horizontal: 10),
                           child: GestureDetector(
                             onTap: () {
-                              // Navigator.push(context, MaterialPageRoute(builder: (context)=>CurrentDialog(userId: state.dialogs[index].id)));
+
+                              Navigator.push(context, MaterialPageRoute(builder: (context)=>CurrentDialogPage()));
                             },
                             child: DisplayedDialogWidget(
                                 name: state.dialogs[index].name.toString(),

@@ -56,7 +56,15 @@ class DialogsDataSource implements DialogsRepo{
 
   @override
   Future<void> fetchDialogWithUser(String chatId)async {
-    throw "e";
+    final token = await SharedPrefsHelper.GetSessionToken();
+
+    final response = await ApiConstants.dio
+        .get("${ApiConstants.devEndpoint}chats?chat_id=$chatId&chat_page=0",
+        options: Options(headers: {
+          'Authorization': 'Bearer ${token.toString()}',
+          'accept': 'application/json',
+        }));
+    
   }
 
   @override

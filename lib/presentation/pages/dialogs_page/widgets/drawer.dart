@@ -51,10 +51,16 @@ class _DrawerWidgetState extends State<DrawerWidget> {
             Navigator.pushNamed(context, '/accountInfo');
           },
           child: UserAccountsDrawerHeader(
-            currentAccountPicture: CircleAvatar(
-              backgroundColor: Colors.black,
-              maxRadius: 50,
-              child: OtherConstants().accountCircle,
+            currentAccountPicture: ClipRRect(
+              borderRadius: BorderRadius.circular(30),
+              child: SizedBox(
+                width: 30,
+                height: 30,
+                child: Image.network(
+                  OtherConstants.accountCircle,
+                  fit: BoxFit.fill,
+                ),
+              ),
             ),
             decoration:
                 const BoxDecoration(color: Color.fromRGBO(46, 45, 49, 1)),

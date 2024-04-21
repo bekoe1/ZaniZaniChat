@@ -10,22 +10,29 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="62d1af30-4240-4ec3-a0cc-7b4bce47f66e" name="Changes" comment="Refactor? bugs fixed">
+      <change afterPath="$PROJECT_DIR$/lib/presentation/pages/current_dialog_page/current_dialog_page.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/presentation/pages/my_account_page/subpages/image_page.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/presentation/pages/my_account_page/widgets/account_info_row_element.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/presentation/pages/my_account_page/widgets/image_carousel.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/data/datasources/my_account_info_data_source.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/data/datasources/my_account_info_data_source.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/domain/repo/account_info_repo.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/domain/repo/account_info_repo.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/data/datasources/dialogs_data_source.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/data/datasources/dialogs_data_source.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/presentation/pages/current_dialog_page/bloc/current_chat_bloc.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/presentation/pages/current_dialog_page/bloc/current_chat_bloc.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/presentation/pages/current_dialog_page/bloc/current_chat_event.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/presentation/pages/current_dialog_page/bloc/current_chat_event.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/presentation/pages/current_dialog_page/widgets/message_bubble.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/presentation/pages/current_dialog_page/widgets/message_bubble.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/presentation/pages/dialogs_page/dialogs.page.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/presentation/pages/dialogs_page/dialogs.page.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/presentation/pages/dialogs_page/widgets/drawer.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/presentation/pages/dialogs_page/widgets/drawer.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/presentation/pages/my_account_page/bloc/my_account_bloc.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/presentation/pages/my_account_page/bloc/my_account_bloc.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/presentation/pages/my_account_page/bloc/my_account_event.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/presentation/pages/my_account_page/bloc/my_account_event.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/presentation/pages/my_account_page/bloc/my_account_state.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/presentation/pages/my_account_page/bloc/my_account_state.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/presentation/pages/login_page/login_page.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/presentation/pages/login_page/login_page.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/presentation/pages/my_account_page/my_account_page.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/presentation/pages/my_account_page/my_account_page.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/presentation/pages/my_account_page/subpages/email_change_page.dart" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/presentation/pages/my_account_page/subpages/fio_change_page.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/presentation/pages/my_account_page/subpages/fio_change_page.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/presentation/pages/my_account_page/subpages/username_change_page.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/presentation/pages/my_account_page/subpages/username_change_page.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/presentation/pages/search_page/bloc/search_bloc.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/presentation/pages/search_page/bloc/search_bloc.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/presentation/pages/search_page/bloc/search_state.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/presentation/pages/search_page/bloc/search_state.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/presentation/pages/search_page/search_page.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/presentation/pages/search_page/search_page.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/presentation/pages/sign_in_page/sign_in_page.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/presentation/pages/sign_in_page/sign_in_page.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/utils/network/constants.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/utils/network/constants.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/utils/textfields.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/utils/textfields.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/linux/flutter/generated_plugin_registrant.cc" beforeDir="false" afterPath="$PROJECT_DIR$/linux/flutter/generated_plugin_registrant.cc" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/linux/flutter/generated_plugins.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/linux/flutter/generated_plugins.cmake" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/macos/Flutter/GeneratedPluginRegistrant.swift" beforeDir="false" afterPath="$PROJECT_DIR$/macos/Flutter/GeneratedPluginRegistrant.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pubspec.lock" beforeDir="false" afterPath="$PROJECT_DIR$/pubspec.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/pubspec.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/windows/flutter/generated_plugin_registrant.cc" beforeDir="false" afterPath="$PROJECT_DIR$/windows/flutter/generated_plugin_registrant.cc" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/windows/flutter/generated_plugins.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/windows/flutter/generated_plugins.cmake" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

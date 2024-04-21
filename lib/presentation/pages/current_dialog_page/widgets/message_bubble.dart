@@ -12,8 +12,7 @@ class MessageBubble extends StatelessWidget {
   final MessageType messageType;
   @override
   Widget build(BuildContext context) {
-    final size = MediaQuery.sizeOf(context);
-
+    final size = MediaQuery.of(context).size;
     final alignment = (messageType is MyMessage)
         ? Alignment.centerRight
         : Alignment.centerLeft;
@@ -29,7 +28,7 @@ class MessageBubble extends StatelessWidget {
     return Align(
       alignment: alignment,
       child: Container(
-        // constraints: BoxConstraints(maxWidth: size.width * 0.66),
+        constraints: BoxConstraints(maxWidth: size.width * 0.66),
         padding: const EdgeInsets.all(8.0),
         margin: const EdgeInsets.all(4.0),
         decoration: BoxDecoration(
@@ -40,7 +39,7 @@ class MessageBubble extends StatelessWidget {
         ),
         child: Text(
           message ?? '',
-          style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+          style: Theme.of(context).textTheme.bodyLarge!.copyWith(
             color: textColor,
           ),
         ),

@@ -81,7 +81,7 @@ class _SignInPageState extends State<SignInPage> {
                         },
                         hintText: "Введите имя пользователя",
                         controller: usernameController,
-                        icon: Icons.person,
+                        leftIcon: Icons.person,
                         obscuringPass: false,
                         onChanged: (name) {
                           context
@@ -105,10 +105,10 @@ class _SignInPageState extends State<SignInPage> {
                         },
                         hintText: "Введите пароль",
                         controller: passwordController,
-                        icon: Icons.https,
+                        leftIcon: Icons.https,
                         obscuringPass: obscuringPassword,
-                        suffixIcon: obscuringIcon,
-                        action: () {
+                        rightIcon: obscuringIcon,
+                        rightAction: () {
                           setState(
                             () {
                               obscuringPassword = !obscuringPassword;
@@ -139,7 +139,7 @@ class _SignInPageState extends State<SignInPage> {
                         },
                         width: 350,
                         hintText: "Введите email",
-                        icon: Icons.email,
+                        leftIcon: Icons.email,
                         obscuringPass: false,
                         controller: emailController,
                         onChanged: (email) {

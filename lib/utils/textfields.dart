@@ -8,9 +8,9 @@ class CustomTextFormField extends StatelessWidget {
     super.key,
     this.controller,
     this.visibleText,
-    this.icon,
-    this.suffixIcon,
-    this.action,
+    this.leftIcon,
+    this.rightIcon,
+    this.rightAction,
     this.onChanged,
     required this.obscuringPass,
     this.hintText,
@@ -31,16 +31,17 @@ class CustomTextFormField extends StatelessWidget {
     this.cursorColor,
     this.iconColor,
     this.inputAction,
-    this.hintColor,
+    this.hintColor, this.leftAction,
   });
 
   final String? errorText;
   final String? hintText;
   final String? visibleText;
   final TextEditingController? controller;
-  final IconData? icon;
-  final IconData? suffixIcon;
-  final void Function()? action;
+  final IconData? leftIcon;
+  final IconData? rightIcon;
+  final void Function()? rightAction;
+  final void Function()? leftAction;
   final TextStyle? hintTextStyle;
   final void Function(String)? onChanged;
   final void Function(String?)? onSaved;
@@ -102,13 +103,15 @@ class CustomTextFormField extends StatelessWidget {
           enabledBorder: _typicalBorder,
           focusedBorder: _typicalBorder,
           contentPadding: const EdgeInsets.all(10),
-          prefixIcon: Icon(
-            icon,
+          prefixIcon: IconButton(
+            icon : Icon(leftIcon, color:  iconColor,),
+            onPressed: leftAction,
             color: iconColor,
           ),
           suffixIcon: IconButton(
-            icon: Icon(suffixIcon),
-            onPressed: action,
+            icon: Icon(rightIcon, color:  iconColor,),
+            color: iconColor,
+            onPressed: rightAction,
           ),
         ),
         controller: controller,

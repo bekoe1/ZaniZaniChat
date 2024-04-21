@@ -1,10 +1,17 @@
 part of 'current_chat_bloc.dart';
 
 @immutable
-abstract class CurrentChatEvent {}
+abstract class CurrentChatEvent {
+  final String? userId;
+  final String? chatId;
 
-class InitialDataFetchingEvent extends CurrentChatEvent{
-  final String userId;
+  CurrentChatEvent({this.userId, this.chatId});
+}
 
-  InitialDataFetchingEvent({required this.userId});
+class InitialDataFetchingEvent extends CurrentChatEvent {
+  final String? userId;
+  final String? chatId;
+
+  InitialDataFetchingEvent({this.chatId, this.userId})
+      : super(chatId: chatId, userId: userId);
 }

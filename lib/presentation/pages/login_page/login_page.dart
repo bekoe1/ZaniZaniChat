@@ -83,7 +83,7 @@ class _LogInPageState extends State<LogInPage> {
                             },
                             hintText: "Введите имя пользователя",
                             controller: usernameController,
-                            icon: Icons.person,
+                            leftIcon: Icons.person,
                             obscuringPass: false,
                           );
                         },
@@ -105,15 +105,15 @@ class _LogInPageState extends State<LogInPage> {
                               },
                               hintText: "Введите пароль",
                               controller: passwordController,
-                              icon: Icons.https,
+                              leftIcon: Icons.https,
                               obscuringPass: obscuringPassword,
-                              suffixIcon: obscuringIcon,
+                              rightIcon: obscuringIcon,
                               onChanged: (name) {
                                 context.read<LogInBloc>().add(
                                     LoginPasswordChanged(
                                         password: passwordController.text));
                               },
-                              action: () {
+                              rightAction: () {
                                 setState(() {
                                   obscuringPassword = !obscuringPassword;
                                   obscuringPassword

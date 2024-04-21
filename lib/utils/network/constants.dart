@@ -19,10 +19,7 @@ class WebSocketConstants {
   static const devEndpoint = "ws://147.45.74.185:8000/ws/messages?token=";
 }
 
-class OtherConstants {
-  final accountCircle = Image.network(
-    "https://cdn0.iconfinder.com/data/icons/actions-ono-system-core/30/account_circle-profile-profile_picture-default_picture-1024.png",
-    color: Colors.white,
-    alignment: Alignment.bottomCenter,
-  );
+abstract class OtherConstants {
+  static final accountCircle =
+      "https://img.freepik.com/free-photo/close-up-on-adorable-kitten-on-couch_23-2150782439.jpg";
 }
