@@ -1,77 +1,70 @@
-import 'dart:developer';
-
-import 'package:bloc_test_app/utils/network/constants.dart';
 import 'package:flutter/material.dart';
+import 'package:photo_view/photo_view.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class ImageCarousel extends StatefulWidget {
   final List<String> images;
   final double height;
-
-  const ImageCarousel(
-      {super.key,
-      required this.images,
-      required this.pageController,
-      required this.height});
-
   final PageController pageController;
+  final bool needTheIndicator;
+  final void Function(int index)? onPageChanged;
+
+  ImageCarousel({
+    Key? key,
+    required this.images,
+    required this.height,
+    required this.pageController,
+    required this.needTheIndicator,
+    this.onPageChanged,
+  }) : super(key: key);
 
   @override
   State<ImageCarousel> createState() => _ImageCarouselState();
 }
 
 class _ImageCarouselState extends State<ImageCarousel> {
-  final pageController = PageController();
-  int currentIndex = 0;
-
   @override
   Widget build(BuildContext context) {
     return Stack(
       children: [
         SizedBox(
           height: widget.height,
-          width: double.infinity,
           child: PageView.builder(
-            onPageChanged: (num) {
-              setState(() {
-                currentIndex = pageController.page!.round();
-                log(pageController.page!.round().toString());
-              });
+            onPageChanged: (index) {
+              widget.onPageChanged != null
+                  ? widget.onPageChanged!(index)
+                  : null;
             },
-            controller: pageController,
-            itemCount: widget.images.isNotEmpty ? widget.images.length : 1,
+            controller: widget.pageController,
             itemBuilder: (context, index) {
-              // currentIndex = index;
-              if (widget.images.isEmpty) {
-                return GestureDetector(
-                  onTap: () {},
-                  child: Image.network(
-                    OtherConstants.accountCircle,
-                    fit: BoxFit.cover,
-                  ),
-                );
-              }
-              return Image.network(
-                widget.images[currentIndex],
-                fit: BoxFit.cover,
+              return PhotoView(
+                initialScale: PhotoViewComputedScale.contained,
+                imageProvider:
+                    NetworkImage(widget.images[index % widget.images.length]),
               );
             },
           ),
         ),
-        Positioned(
-          bottom: 15,
-          left: 0,
-          right: 0,
-          child: Center(
+        if (widget.needTheIndicator)
+          Positioned(
+            bottom: 15,
+            left: 21.54,
             child: SmoothPageIndicator(
-              effect: const ExpandingDotsEffect(
-                activeDotColor: Colors.indigo
+              effect: ExpandingDotsEffect(
+                activeDotColor: Colors.white,
+                dotColor: Colors.grey,
+                dotHeight: 7,
+                dotWidth:
+                    MediaQuery.of(context).size.width / widget.images.length -
+                        20,
+                expansionFactor: 1.01,
               ),
-              controller: pageController,
-              count: 3,
+              controller: widget.pageController,
+              count: widget.images.length,
             ),
-          ),
-        ),
+          )
+        else
+          const Placeholder(color: Colors.transparent),
       ],
     );
   }

@@ -1,3 +1,4 @@
+import 'package:bloc_test_app/presentation/pages/my_account_page/my_account_page.dart';
 import 'package:bloc_test_app/utils/internal_storage_helper.dart';
 import 'package:bloc_test_app/utils/network/constants.dart';
 import 'package:flutter/material.dart';
@@ -48,7 +49,7 @@ class _DrawerWidgetState extends State<DrawerWidget> {
       child: ListView(children: [
         GestureDetector(
           onTap: () {
-            Navigator.pushNamed(context, '/accountInfo');
+            Navigator.push(context, MaterialPageRoute(builder: (context)=>const MyAccountPage()));
           },
           child: UserAccountsDrawerHeader(
             currentAccountPicture: ClipRRect(

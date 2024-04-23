@@ -49,6 +49,8 @@ dependencies:
   flutter_slidable: ^3.0.1
   image_picker: ^1.0.7
   smooth_page_indicator: ^1.1.0
+  photo_view: ^0.15.0
+
 
 
 dev_dependencies:
