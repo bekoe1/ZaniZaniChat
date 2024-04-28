@@ -3,35 +3,55 @@ import 'dart:developer';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class SharedPrefsHelper {
-  static final sessionName = "Session";
-  static final userName = "Username";
+  static const sessionName = "Session";
+  static const userName = "username";
+  static const myId = "myId";
 
-  static Future<String?> GetSessionToken() async {
+  static Future<String?> getSessionToken() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     return prefs.getString(sessionName);
   }
 
-  static Future<void> SetName(String value) async {
+  static Future<void> setName(String value) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     prefs.setString(userName, value);
   }
 
-  static Future<String?> GetName() async {
+  static Future<String?> getId() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    final id = prefs.getString(myId);
+    log(id.toString());
+    return id;
+  }
+
+  static Future<void> setID(String id) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.setString(myId, id);
+  }
+
+  static Future<String?> getName() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     return prefs.getString(userName);
   }
-
-  static Future<bool> IsSessionInStorage() async {
+  static Future<void> deleteName() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.remove(userName);
+  }
+  static Future<bool> isSessionInStorage() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     return prefs.containsKey(sessionName);
   }
 
-  static Future<void> DeleteSession() async {
+  static Future<void> deleteSession() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     prefs.remove(sessionName);
   }
 
-  static Future<void> SetSessionToken(String value) async {
+  static Future<void> deleteMyId() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.remove(myId);
+  }
+  static Future<void> setSessionToken(String value) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     prefs.setString(sessionName, value);
   }

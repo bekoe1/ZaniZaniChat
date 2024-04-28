@@ -8,7 +8,7 @@ import '../../utils/internal_storage_helper.dart';
 class SearchDataSource implements SearchRepo {
   @override
   Future<List<SearchedAccount>?> searchAccounts(String name) async {
-    final token = await SharedPrefsHelper.GetSessionToken();
+    final token = await SharedPrefsHelper.getSessionToken();
     Map<String, dynamic> data = {
       "query": name,
     };

@@ -69,6 +69,14 @@ class FioChangePage extends StatelessWidget {
                           ),
                         );
                         FocusScope.of(context).unfocus();
+                        Future.delayed(const Duration(milliseconds: 500)).then(
+                          (_) => Navigator.pushReplacement(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => const MyAccountPage(),
+                            ),
+                          ),
+                        );
                       } else {
                         ScaffoldMessenger.of(context).showSnackBar(
                           const SnackBar(

@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import '../subpages/image_page.dart';
 import 'image_carousel.dart';
 
-class ProfilePicWidget extends StatefulWidget {
+class ProfilePicWidget extends StatelessWidget {
   ProfilePicWidget({
     Key? key,
     required this.images,
@@ -15,23 +15,28 @@ class ProfilePicWidget extends StatefulWidget {
   final double height;
 
   @override
-  State<ProfilePicWidget> createState() => _ProfilePicWidgetState();
-}
-
-class _ProfilePicWidgetState extends State<ProfilePicWidget> {
-  @override
   Widget build(BuildContext context) {
     return SliverAppBar(
+      actions: [
+        IconButton(
+          onPressed: () {},
+          icon: const Icon(
+            Icons.more_vert,
+            color: Colors.white,
+          ),
+        )
+      ],
       leading: IconButton(
         icon: const Icon(
           Icons.arrow_back,
           color: Colors.white,
         ),
         onPressed: () {
-          Navigator.pop(context);
-        },
+          Navigator.of(context).popUntil(ModalRoute.withName("/DialogsPage"));
+        // Navigator.pop(context);
+        }
       ),
-      expandedHeight: widget.height,
+      expandedHeight: height,
       backgroundColor: Colors.white12,
       iconTheme: const IconThemeData(color: Colors.white),
       pinned: true,
@@ -44,7 +49,7 @@ class _ProfilePicWidgetState extends State<ProfilePicWidget> {
               context,
               MaterialPageRoute(
                 builder: (context) => ImagePage(
-                  initialIndex: widget.pageController.page!.round(),
+                  initialIndex: pageController.page!.round(),
                   images: const [
                     "https://img.freepik.com/free-photo/close-up-on-adorable-kitten-on-couch_23-2150782439.jpg",
                     "https://img.freepik.com/free-photo/close-up-on-adorable-kitten-on-couch_23-2150782439.jpg",
@@ -55,13 +60,13 @@ class _ProfilePicWidgetState extends State<ProfilePicWidget> {
             );
           },
           child: ImageCarousel(
-            pageController: widget.pageController,
+            pageController: pageController,
             images: const [
               "https://img.freepik.com/free-photo/close-up-on-adorable-kitten-on-couch_23-2150782439.jpg",
               "https://img.freepik.com/free-photo/close-up-on-adorable-kitten-on-couch_23-2150782439.jpg",
               "https://img.freepik.com/free-photo/painting-mountain-lake-with-mountain-background_188544-9126.jpg",
             ],
-            height: widget.height + 25,
+            height: height + 25,
             needTheIndicator: true,
           ),
         ),

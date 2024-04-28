@@ -28,7 +28,7 @@ class _DrawerWidgetState extends State<DrawerWidget> {
   }
 
   void SetName() {
-    SharedPrefsHelper.GetName().then((nameFromPrefs) {
+    SharedPrefsHelper.getName().then((nameFromPrefs) {
       setState(() {
         name = nameFromPrefs ?? "";
       });

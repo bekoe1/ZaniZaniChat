@@ -1,6 +1,7 @@
 import 'dart:developer';
 
 import 'package:bloc_test_app/data/datasources/auth_data_source.dart';
+import 'package:bloc_test_app/presentation/pages/dialogs_page/dialogs.page.dart';
 import 'package:bloc_test_app/presentation/pages/login_page/bloc/log_in_bloc.dart';
 import 'package:bloc_test_app/utils/form_submission_status.dart';
 import 'package:bloc_test_app/utils/internal_storage_helper.dart';
@@ -28,7 +29,7 @@ class _LogInPageState extends State<LogInPage> {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => LogInBloc(dataSource: AuthDataSource()),
+      create: (context) => LogInBloc(authDataSource: AuthDataSource()),
       child: Scaffold(
         backgroundColor: Colors.white10,
         body: GestureDetector(
@@ -154,8 +155,7 @@ class _LogInPageState extends State<LogInPage> {
                 }, listener: (context, state) {
                   if (formKey.currentState!.validate()) {
                     if (state.status is SubmissionSuccess) {
-                      SharedPrefsHelper.SetName(state.username);
-                      Navigator.pushNamed(context, "/dialogs");
+                      Navigator.push(context, MaterialPageRoute(builder: (context)=>const DialogsPage(), settings: const RouteSettings(name: "/DialogsPage")));
                     }
                     if (state.status is SubmissionFailed) {
                       ScaffoldMessenger.of(context).showSnackBar(

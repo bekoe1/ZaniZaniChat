@@ -1,13 +1,17 @@
 part of 'current_chat_bloc.dart';
 
 @immutable
-abstract class CurrentChatState {
+class CurrentChatState {
   final String? chatId;
+  final List<MessageDto> messages = [];
+  final String? myId;
 
-  CurrentChatState({this.chatId});
+  CurrentChatState({
+    this.chatId,
+    this.myId,
+  });
 }
 
-class CurrentChatInitial extends CurrentChatState {}
 
 class CurrentChatDoesNotExist extends CurrentChatState {}
 
@@ -15,6 +19,21 @@ class CurrentChatIsLoading extends CurrentChatState {}
 
 class CurrentChatFound extends CurrentChatState {
   final String chatId;
+  final String myId;
+  final List<MessageDto> messages;
 
-  CurrentChatFound({required this.chatId}) : super(chatId: chatId);
+  CurrentChatFound({
+    required this.myId,
+    required this.chatId,
+    required this.messages,
+  }) : super(
+          chatId: chatId,
+          myId: myId,
+        );
+}
+
+class CurrentChatLoadingError extends CurrentChatState {
+  final String error;
+
+  CurrentChatLoadingError({super.chatId, required this.error});
 }

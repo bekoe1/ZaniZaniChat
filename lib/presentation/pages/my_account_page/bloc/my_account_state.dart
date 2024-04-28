@@ -12,7 +12,7 @@ class MyAccountInitial extends MyAccountState {
 }
 
 class MyAccDataFetched extends MyAccountState {
-  final MyAccountInfoData? data;
+  final MyAccountInfoData data;
 
   MyAccDataFetched({required this.data}) : super(data: data);
 }

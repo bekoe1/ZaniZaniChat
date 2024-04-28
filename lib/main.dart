@@ -10,8 +10,8 @@ import 'package:flutter/material.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  final token = await SharedPrefsHelper.GetSessionToken();
-  final bool tk = await SharedPrefsHelper.IsSessionInStorage();
+  final token = await SharedPrefsHelper.getSessionToken();
+  final bool tk = await SharedPrefsHelper.isSessionInStorage();
   if(tk == true) {
     log("da");
   } else {
@@ -35,7 +35,7 @@ class MyApp extends StatelessWidget {
           '/dialogs' : (context) =>  const DialogsPage(),
           '/accountInfo' : (context) => const MyAccountPage(),
         },
-        home: token == null ? const LogInPage() : const DialogsPage());
-       // home: LogInPage());
+        // home: token == null ? const LogInPage() : const DialogsPage());
+       home: const LogInPage());
   }
 }

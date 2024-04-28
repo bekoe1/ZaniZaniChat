@@ -6,7 +6,7 @@ abstract class DialogsEvent {}
 class FetchDialogsEvent extends DialogsEvent {
   final int page;
 
-  FetchDialogsEvent(this.page);
+  FetchDialogsEvent({required this.page});
 }
 
 class DeleteDialogEvent extends DialogsEvent {
@@ -21,8 +21,3 @@ class DeleteDialogEvent extends DialogsEvent {
 
 class NoDialogsEvent extends DialogsEvent {}
 
-class OpenedChatEvent extends DialogsEvent {
-  final String chatId;
-
-  OpenedChatEvent({required this.chatId});
-}

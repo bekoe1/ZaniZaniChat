@@ -4,13 +4,17 @@ part of 'search_bloc.dart';
 abstract class SearchState {
   final List<SearchedAccount>? accounts;
 
-  SearchState({this.accounts});
+  const SearchState({this.accounts});
 }
 
 class SearchInitial extends SearchState {
-  SearchInitial({super.accounts});
+  const SearchInitial({super.accounts});
 }
-class EmptySearchState extends SearchState{EmptySearchState({super.accounts});}
+
+class EmptySearchState extends SearchState {
+  EmptySearchState({super.accounts});
+}
+
 class SearchedAccountFoundState extends SearchState {
   SearchedAccountFoundState({super.accounts});
 }

@@ -4,21 +4,28 @@ part of 'dialogs_bloc.dart';
 abstract class DialogsState {
   final List<DialogsData>? dialogs;
   final String? chatId;
-  DialogsState({this.chatId,this.dialogs});
+  final String? myId;
+
+  DialogsState({
+    this.chatId,
+    this.dialogs,
+    this.myId,
+  });
 }
 
 class DialogsInitial extends DialogsState {}
 
 class FetchedDialogsState extends DialogsState {
   final List<DialogsData> dialogs;
+  final String myId;
 
-  FetchedDialogsState({required this.dialogs}) : super(dialogs: dialogs);
+  FetchedDialogsState({
+    required this.dialogs,
+    required this.myId,
+  }) : super(dialogs: dialogs);
 }
-class CanOpenChatState extends DialogsState{
-  final String chatId;
 
-  CanOpenChatState({required this.chatId}): super(chatId: chatId);
-}
+//
 
 class ErrorInFetchingDialogsState extends DialogsState {
   final String? exception;

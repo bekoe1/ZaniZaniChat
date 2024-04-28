@@ -1,5 +1,7 @@
 import 'dart:developer';
 
+import 'package:bloc_test_app/presentation/pages/current_dialog_page/bloc/current_chat_bloc.dart';
+import 'package:bloc_test_app/presentation/pages/current_dialog_page/current_dialog_page.dart';
 import 'package:bloc_test_app/presentation/pages/search_page/bloc/search_bloc.dart';
 import 'package:bloc_test_app/utils/textfields.dart';
 import 'package:flutter/material.dart';
@@ -80,17 +82,22 @@ class _SearchPageState extends State<SearchPage> {
                           padding: const EdgeInsets.only(
                               left: 15, top: 5, bottom: 5),
                           child: GestureDetector(
-                            // onTap: () {
-                            //   Navigator.push(
-                            //     context,
-                            //     MaterialPageRoute(
-                            //       builder: (context) => CurrentDialog(
-                            //         userId:
-                            //             state.accounts!.results[index].username,
-                            //       ),
-                            //     ),
-                            //   );
-                            // },
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) {
+                                      // log("Айдишник = ${state.accounts![index].id}");
+                                      return CurrentDialogPage(
+                                        userId:
+                                        state.accounts![index].id,
+                                        anotherUserName: state.accounts![index]
+                                            .username,
+                                      );
+                                    }
+                                ),
+                              );
+                            },
                             child: SizedBox(
                               height: 70,
                               child: Row(

@@ -9,7 +9,7 @@ import 'package:dio/dio.dart';
 class MyAccountDataSource implements AccountInfoRepo {
   @override
   Future<MyAccountInfoData?> getData() async {
-    final token = await SharedPrefsHelper.GetSessionToken();
+    final token = await SharedPrefsHelper.getSessionToken();
     final response = await ApiConstants.dio.get(
       "${ApiConstants.devEndpoint}me/",
       options: Options(
@@ -35,7 +35,7 @@ class MyAccountDataSource implements AccountInfoRepo {
 
   @override
   Future<String?> changeNameAndSurname(String name, String surname)async {
-    final token = await SharedPrefsHelper.GetSessionToken();
+    final token = await SharedPrefsHelper.getSessionToken();
     try {
       final responseFromNameChanging = await ApiConstants.dio.put(
         "${ApiConstants.devEndpoint}me/name",
@@ -77,7 +77,7 @@ class MyAccountDataSource implements AccountInfoRepo {
 
   @override
   Future<String?> changeUsername(String data) async{
-    final token = await SharedPrefsHelper.GetSessionToken();
+    final token = await SharedPrefsHelper.getSessionToken();
     try {
       final response = await ApiConstants.dio.put(
         "${ApiConstants.devEndpoint}me/username",

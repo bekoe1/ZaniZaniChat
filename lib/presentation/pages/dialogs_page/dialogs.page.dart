@@ -26,7 +26,7 @@ class _DialogsPageState extends State<DialogsPage> {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (_) => DialogsBloc()..add(FetchDialogsEvent(0)),
+      create: (_) => DialogsBloc()..add(FetchDialogsEvent(page: 0)),
       child: BlocBuilder<DialogsBloc, DialogsState>(builder: (context, state) {
         return Scaffold(
           key: _scaffoldKey,
@@ -68,68 +68,86 @@ class _DialogsPageState extends State<DialogsPage> {
               });
             });
           }),
-          body: ListView.builder(
-              itemCount: state.dialogs?.length ?? 0,
-              itemBuilder: (context, index) {
-                if (state is FetchedDialogsState) {
-                  List<DialogsData> dialogs = state.dialogs;
-                  return Column(
-                    children: [
-                      Slidable(
-                        endActionPane: ActionPane(
-                          motion: const ScrollMotion(),
-                          children: [
-                            SlidableAction(
-                              onPressed: (BuildContext context) {
-                                //  todo delete method
-                              },
-                              icon: Icons.delete,
-                              spacing: 1,
-                              autoClose: true,
-                              backgroundColor: Colors.grey,
-                              foregroundColor: Colors.black,
+          body: RefreshIndicator(
+            displacement: 10,
+            onRefresh: () async {
+              (context).read<DialogsBloc>().add(FetchDialogsEvent(page: 0));
+            },
+            child: ListView.builder(
+                itemCount: state.dialogs?.length ?? 0,
+                itemBuilder: (context, index) {
+                  if (state is FetchedDialogsState) {
+                    List<DialogsData> dialogs = state.dialogs;
+                    return SizedBox.fromSize(
+                      size: MediaQuery.of(context).size,
+                      child: Column(
+                        children: [
+                          Slidable(
+                            endActionPane: ActionPane(
+                              motion: const ScrollMotion(),
+                              children: [
+                                SlidableAction(
+                                  onPressed: (BuildContext context) {
+                                    //  todo delete method
+                                  },
+                                  icon: Icons.delete,
+                                  spacing: 1,
+                                  autoClose: true,
+                                  backgroundColor: Colors.grey,
+                                  foregroundColor: Colors.black,
+                                ),
+                              ],
                             ),
-                          ],
-                        ),
-                        child: Padding(
-                          padding: const EdgeInsets.symmetric(
-                              vertical: 10, horizontal: 10),
-                          child: GestureDetector(
-                            onTap: () {
-
-                              Navigator.push(context, MaterialPageRoute(builder: (context)=>CurrentDialogPage()));
-                            },
-                            child: DisplayedDialogWidget(
-                                name: state.dialogs[index].name.toString(),
-                                message:
-                                    state.dialogs[index].lastMessage.data != ""
+                            child: Padding(
+                              padding: const EdgeInsets.symmetric(
+                                  vertical: 10, horizontal: 10),
+                              child: GestureDetector(
+                                onTap: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => CurrentDialogPage(
+                                        chatId: state.dialogs[index].id,
+                                        anotherUserName: state.dialogs[index].name,
+                                      ),
+                                    ),
+                                  );
+                                },
+                                child: DisplayedDialogWidget(
+                                    name: state.dialogs[index].name.toString(),
+                                    message: state.dialogs[index].lastMessage
+                                                .data !=
+                                            ""
                                         ? state.dialogs[index].lastMessage.data
                                         : "chat created",
-                                time:
-                                    "${state.dialogs[index].lastMessage.time.hour.toString().padLeft(2, '0')}:${state.dialogs[index].lastMessage.time.minute.toString().padLeft(2, '0')}",
-                                read: state.dialogs[index].lastMessage.read),
+                                    time:
+                                        "${state.dialogs[index].lastMessage.time.hour.toString().padLeft(2, '0')}:${state.dialogs[index].lastMessage.time.minute.toString().padLeft(2, '0')}",
+                                    read:
+                                        state.dialogs[index].lastMessage.read),
+                              ),
+                            ),
                           ),
-                        ),
+                        ],
                       ),
-                    ],
-                  );
-                } else if (state is DialogsInitial) {
-                  return const Center(child: CircularProgressIndicator());
-                } else if (state is NoDialogsState) {
-                  return const Center(
-                    child: Text(
-                      "Для поиска собеседника нажмите 'Поиск'",
-                      style: TextStyle(color: Colors.white),
-                    ),
-                  );
-                } else {
-                  return const Center(
+                    );
+                  } else if (state is DialogsInitial) {
+                    return const Center(child: CircularProgressIndicator());
+                  } else if (state is NoDialogsState) {
+                    return const Center(
                       child: Text(
-                    "Ошибка",
-                    style: TextStyle(color: Colors.white),
-                  ));
-                }
-              }),
+                        "Для поиска собеседника нажмите 'Поиск'",
+                        style: TextStyle(color: Colors.white),
+                      ),
+                    );
+                  } else {
+                    return const Center(
+                        child: Text(
+                      "Ошибка",
+                      style: TextStyle(color: Colors.white),
+                    ));
+                  }
+                }),
+          ),
         );
       }),
     );

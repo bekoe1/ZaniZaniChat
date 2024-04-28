@@ -21,7 +21,7 @@ class AuthDataSource implements AuthRepo {
           .post('${ApiConstants.devEndpoint}auth/token', data: data);
       if (response.statusCode == 200) {
         final accessToken = AccessTokenModel.fromJson(response.data);
-        SharedPrefsHelper.SetSessionToken(accessToken.accessToken.toString());
+        SharedPrefsHelper.setSessionToken(accessToken.accessToken.toString());
         return accessToken.accessToken;
       }
     } catch (e) {
@@ -32,9 +32,9 @@ class AuthDataSource implements AuthRepo {
 
   @override
   Future<String?> logOut() async {
-    final token = await SharedPrefsHelper.GetSessionToken();
+    final token = await SharedPrefsHelper.getSessionToken();
     final response = await ApiConstants.dio.delete(
-      "${ApiConstants.devEndpoint}auth/logout/",
+      "${ApiConstants.devEndpoint}auth/logout",
       options: Options(
         headers: {
           'Authorization': 'Bearer ${token.toString()}',
@@ -43,20 +43,22 @@ class AuthDataSource implements AuthRepo {
       ),
     );
 
-    if(response.statusCode == 200){
-      SharedPrefsHelper.DeleteSession();
+    if (response.statusCode == 200) {
+      SharedPrefsHelper.deleteSession();
+      SharedPrefsHelper.deleteMyId();
+      SharedPrefsHelper.deleteName();
       return null;
-    }
-    else{
+    } else {
       return response.data["message"];
     }
   }
 
   @override
-  Future<bool> signIn(
-      {required String name,
-      required String email,
-      required String pass}) async {
+  Future<bool> signIn({
+    required String name,
+    required String email,
+    required String pass,
+  }) async {
     Map<String, dynamic> data = {
       "username": name,
       "password": pass,
@@ -65,7 +67,7 @@ class AuthDataSource implements AuthRepo {
 
     try {
       Response response = await ApiConstants.dio
-          .post('${ApiConstants.devEndpoint}register', data: data);
+          .post('${ApiConstants.devEndpoint}auth/register', data: data);
       if (response.statusCode == 200) {
         return true;
       } else {
