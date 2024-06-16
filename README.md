@@ -1,16 +1,9 @@
-# bloc_test_app
+# Flutter Chat App
 
-A new Flutter project.
+## Функционал
+1. Доставка сообщений реализована через WebSocket
+2. Поиск пользователей, log in и sign in функции реализованы через http запросы к бэкенду(кастомный, не firebase)
+3. Есть возможность кастомизации профиля(в разработке)
 
-## Getting Started
 
-This project is a starting point for a Flutter application.
 
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
